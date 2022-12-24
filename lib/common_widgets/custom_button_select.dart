@@ -17,7 +17,8 @@ class Custom_Button_Select extends StatelessWidget {
     required this.color,
     required this.colorText,
     this.borderRadius: 2.0, //Toma este valor por defecto de no ser llamado
-    this.height: 150.0,
+    this.height: 10.0,
+    this.width: 10.0,
     required this.onPressed,
   }) : assert(borderRadius != null);
 
@@ -27,6 +28,7 @@ class Custom_Button_Select extends StatelessWidget {
   final Color colorText;
   final double borderRadius;
   final double height;
+  final double width;
   final VoidCallback onPressed;
 
 
@@ -35,6 +37,7 @@ class Custom_Button_Select extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height:height,
+      width: width,
       child: ElevatedButton(
         child: child,
         style: ElevatedButton.styleFrom(

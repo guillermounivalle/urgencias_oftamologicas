@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:urgencias_oftamologicas/common_widgets/Custom_Button_Select.dart';
+import 'package:urgencias_oftamologicas/common_widgets/custom_button_select.dart';
 import 'package:flutter/material.dart';
 /**
  *
@@ -24,14 +24,14 @@ class SelectModuleButton extends Custom_Button_Select {
               Text(text, style: TextStyle(color: colorText, fontSize: 15.0)),
               Opacity(
                 opacity: 0.0,
-                child:Image.asset(assetName),
               ),//Este opacity permite acomodar centrado el texto sign in
             ],
           ),
           borderRadius: borderRadius,
           color: color,
           colorText: colorText,
-          height: 150.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
+          width: 170.0,
+          height: 170.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
           //en la clase Custom
           onPressed: onPressed
       );
