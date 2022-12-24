@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/home_page.dart';
 
 
-//Defining Intro
-void main() {
-  runApp(const MyApp());
+
+//define entry point
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //Run Firebase initialize
+  await Firebase.initializeApp();
+  //the main method runApp. Into run App will go the root widget MyApp()
+  runApp(MyApp());
 }
 
 

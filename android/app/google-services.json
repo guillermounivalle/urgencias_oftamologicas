@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "678900420337",
+    "firebase_url": "https://app-urgencias-oftamologicas-default-rtdb.firebaseio.com",
+    "project_id": "app-urgencias-oftamologicas",
+    "storage_bucket": "app-urgencias-oftamologicas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678900420337:android:6bd63c711039100af0e350",
+        "android_client_info": {
+          "package_name": "com.example.urgencias_oftamologicas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678900420337-ue0l1o7aahqr076stc3at8jfp6d6fet7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.urgencias_oftamologicas",
+            "certificate_hash": "56483d0a67ee0dcce430f5f2f0d427a1657ee23d"
+          }
+        },
+        {
+          "client_id": "678900420337-3vb18q62oo4jhqh9v43bpu0fpf1ciutf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu8O_PW3UNN1--5et3BaCqhZ4_B1wGbvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678900420337-3vb18q62oo4jhqh9v43bpu0fpf1ciutf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
