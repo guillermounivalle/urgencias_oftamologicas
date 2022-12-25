@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:urgencias_oftamologicas/app/home_page.dart';
+import 'package:urgencias_oftamologicas/services/auth.dart';
+import 'app/landing_page.dart';
 
 
 
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: LandingPage(
+        auth: Auth()
+      ),
     );
   }
 }

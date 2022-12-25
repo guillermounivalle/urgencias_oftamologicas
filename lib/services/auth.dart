@@ -12,6 +12,7 @@ abstract class AuthBase {
 
 class Auth implements AuthBase{
 
+  //Se crea una instancia. Una clase Singleton anteriormente
   final _firebaseAuth = FirebaseAuth.instance;
 
   @override

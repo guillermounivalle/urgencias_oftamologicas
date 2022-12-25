@@ -3,9 +3,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/app_navigate/select_module_button.dart';
+import 'package:urgencias_oftamologicas/services/auth.dart';
+import 'app.signin/email_sign_in_page.dart';
+
 
 class HomePage extends StatelessWidget {
-  const HomePage({ super.key} );
+  const HomePage({ super.key, required this.auth} );
+  final AuthBase auth; //Llamando la clase abstracta creada en auth.dart
+
+  Future<void> _signInWithEmailAndPassword(BuildContext context, String typeUser) async {
+    // TODO: Show EmailSignPage
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        fullscreenDialog: true,  //true muestra el diálogo para retornar
+        builder: (context) => EmailSignPage(auth: auth, typeUser: typeUser),
+      ),
+    );
+  }
 
 
 
@@ -19,13 +33,13 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(//Evita el desborde de pantalla
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: buildContent(),
+          child: buildContent(context),
       ),
     ),
     );
   }
 
-  Container buildContent(){
+  Container buildContent(BuildContext context){
     List imgList = [
       'images/hospital.jpg',
       'images/registerimage.jpg'
@@ -87,7 +101,7 @@ class HomePage extends StatelessWidget {
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
-                onPressed: (){},
+                onPressed: () => _signInWithEmailAndPassword(context, "user"),
               ),
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
@@ -95,7 +109,7 @@ class HomePage extends StatelessWidget {
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
-                onPressed: (){},
+                onPressed:  () => _signInWithEmailAndPassword(context, "admin"),
               ),
             ],
           )
