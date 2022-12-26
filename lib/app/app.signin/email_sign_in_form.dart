@@ -1,9 +1,10 @@
 
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/app.signin/validators.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import '../../common_widgets/form_submit_button.dart';
+import '../../common_widgets/show_alert_dialog.dart';
 
 enum EmailSignInFormType {signIn, register }
 
@@ -43,8 +44,15 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       }else{
         await widget.auth.createUserWithEmailAndPassword(_email, _password);
       }
+      Navigator.of(context).pop();
     }catch (e){
       print('======> Error emailandpassword method  ' +e.toString());
+      showAlertDialog(
+          context,
+          title: 'Sign In Failed',
+          content: e.toString(),
+          defaultActionText: 'OK'
+      );
     }finally{
       setState(() {
         _isLoading = false;
