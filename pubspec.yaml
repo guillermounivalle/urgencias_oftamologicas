@@ -44,6 +44,8 @@ dependencies:
   firebase_core: ^2.4.0
   #firebase authentication
   firebase_auth: ^4.2.3
+  #provider for generic uses
+  provider: ^6.0.5
 
 
 

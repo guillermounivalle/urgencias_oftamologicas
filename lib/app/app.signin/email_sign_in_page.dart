@@ -5,8 +5,8 @@ import 'package:urgencias_oftamologicas/services/auth.dart';
 import 'email_sign_in_form.dart';
 
 class EmailSignPage extends StatelessWidget {
-  const EmailSignPage({ super.key, required this.auth, required String typeUser});
-  final AuthBase auth;
+  const EmailSignPage({ super.key,  required String typeUser});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(//==> Estructura visal del layout (AppBar, Body, FloatingActionBottom)
@@ -19,7 +19,8 @@ class EmailSignPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
-              child: EmailSignInForm(auth: auth, )),
+              child: EmailSignInForm( )
+          ),
         ),
       ),
       backgroundColor: Colors.grey[200],

@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,  //true muestra el diálogo para retornar
-        builder: (context) => EmailSignPage(auth: auth, typeUser: typeUser),
+        builder: (context) => EmailSignPage(typeUser: typeUser),
       ),
     );
   }

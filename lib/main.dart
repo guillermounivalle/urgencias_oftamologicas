@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import 'app/landing_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,15 +24,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Urgencias Oftamológicas',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LandingPage(
-        auth: Auth()
-      ),
+    return Provider<AuthBase>(//<AuthBase> Create type Annotation
+      create: (context) => Auth(), //(context)Create argument, Auth() object that we need
+      child: MaterialApp(
+          title: 'Urgencias Oftamológicas', //title app
+          theme: ThemeData(//Leer documentaci{on themeData
+            primarySwatch: Colors.deepPurple, //primary color of our entire app
+          ),
+          home: LandingPage()
+      ), //Llamamos como home a la clase LandingPage
     );
   }
 }
 
+/**
+ * MaterialApp(
+    title: 'Urgencias Oftamológicas',
+    theme: ThemeData(
+    primarySwatch: Colors.blue,
+    ),
+    home: LandingPage(
+    ),
+    );*/
