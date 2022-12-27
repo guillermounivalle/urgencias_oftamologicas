@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Urgencias Oftamológicas', //title app
           theme: ThemeData(//Leer documentaci{on themeData
-            primarySwatch: Colors.deepPurple, //primary color of our entire app
+            primarySwatch: Colors.blue, //primary color of our entire app
           ),
-          home: LandingPage()
+          home: LandingPage(),
       ), //Llamamos como home a la clase LandingPage
     );
   }

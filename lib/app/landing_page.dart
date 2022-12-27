@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:urgencias_oftamologicas/app/users/menu_user_page.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 
 import 'home_page.dart';
@@ -21,13 +22,10 @@ class LandingPage extends StatelessWidget {
             if(user == null) {
               return HomePage(
                 auth: auth,
-                //onSignIn: _updateUser, Esta linea desaparece. Cambia en la clase SigninPage
               );
             }
-            return HomePage(
-              auth: auth,
-              //onSignOut: () => {_updateUser(null)}, Esta linea desaparece
-            );
+            return
+                MenuUserPage();
           }
           return Scaffold(
             body: Center(

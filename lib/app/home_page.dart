@@ -3,6 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/app_navigate/select_module_button.dart';
+import 'package:urgencias_oftamologicas/app/users/patient_admission.dart';
+import 'package:urgencias_oftamologicas/app/users/patient_home.dart';
+import 'package:urgencias_oftamologicas/app/users/patient_hospitalization.dart';
+import 'package:urgencias_oftamologicas/app/users/patient_surgery.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import 'app.signin/email_sign_in_page.dart';
 
@@ -30,12 +34,12 @@ class HomePage extends StatelessWidget {
           title: Text('Urgencias Oftamológicas'),
           elevation: 10.0,  //Shadow bar. Crea un efecto sombra
       ),
-      body: SingleChildScrollView(//Evita el desborde de pantalla
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: buildContent(context),
-      ),
-    ),
+        ),
+      )
     );
   }
 
