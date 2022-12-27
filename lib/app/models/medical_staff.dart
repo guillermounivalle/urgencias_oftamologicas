@@ -32,5 +32,4 @@ class MedicalStaff{
       'isactive': isactive
     };
   }
-
 }
