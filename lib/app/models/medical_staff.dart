@@ -1,7 +1,7 @@
 
 
-class UserData{
-  UserData({
+class MedicalStaff{
+  MedicalStaff({
     required this.name,
     required this. lastname,
     required this.documentId,
