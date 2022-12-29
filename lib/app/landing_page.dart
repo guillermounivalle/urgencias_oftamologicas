@@ -12,6 +12,8 @@ import 'home_page.dart';
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -20,10 +22,9 @@ class LandingPage extends StatelessWidget {
         builder: (context, snapshot){
           if(snapshot.connectionState == ConnectionState.active){
             final User? user = snapshot.data;
+            print('========> User '+ user.toString());
             if(user == null) {
-              return HomePage(
-                auth: auth,
-              );
+              return HomePage();
             }
             return
               Provider<Database>(

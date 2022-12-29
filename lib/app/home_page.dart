@@ -12,8 +12,8 @@ import 'app.signin/email_sign_in_page.dart';
 
 
 class HomePage extends StatelessWidget {
-  const HomePage({ super.key, required this.auth} );
-  final AuthBase auth; //Llamando la clase abstracta creada en auth.dart
+  const HomePage({ super.key} );
+  //final AuthBase auth; //Llamando la clase abstracta creada en auth.dart
 
   Future<void> _signInWithEmailAndPassword(BuildContext context, String typeUser) async {
     // TODO: Show EmailSignPage
