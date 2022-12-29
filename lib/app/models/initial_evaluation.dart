@@ -1,6 +1,13 @@
 
 
 class InitialEvaluation{
+  /**
+   * Definicón de parametros
+   * patology ==> Patología (Traúmatica, No Traúmatica)
+   * abnormal_fundus ==> Fondo de ojo anormal ( SI {OJO DERECHO, IZQUIERDO, AMBOS}, NO)
+   * anterior_chamber_alterations ==> ALteración de la camara anterior ( SI {OJO DERECHO, IZQUIERDO, AMBOS}, NO)
+   *blunt_trauma ==> Trauma Contuso ( SI {OJO DERECHO, IZQUIERDO, AMBOS}, NO)
+   * */
   InitialEvaluation({
     required this.patology,
     required this. abnormal_fundus,

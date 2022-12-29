@@ -6,15 +6,33 @@ import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_admission.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_hospitalization.dart';
+import 'package:urgencias_oftamologicas/app/users/patient_information.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_surgery.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
-
 import '../../common_widgets/show_alert_dialog.dart';
+import '../../services/database.dart';
 import '../app_navigate/select_module_button.dart';
-
+import '../models/patients.dart';
+import  'package:intl/intl.dart';
 class MenuUserPage extends StatelessWidget {
   const MenuUserPage({super.key}) ;
-  
+
+  Future<void> _inserData_User(BuildContext context) async{
+    String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+    final database = Provider.of<Database>(context, listen: false);
+    await database.addPatient(
+        Patients(
+          name:'Guillermo',
+          lastname: 'Hernandez',
+          documentId: '94064730',
+          gender: 'Masculino',
+          socioeconomic: '3',
+          schooling: 'Primaria',
+          source: 'Rural',
+          age:25,
+          birthdate: cdate,
+         ));
+  }
 
   //Is not necesary make the Singleton Class
   //FirebaseAuth.instance is a static class
@@ -72,9 +90,18 @@ class MenuUserPage extends StatelessWidget {
       break;
       case "Home": {
         Navigator.of(context).push(
-          MaterialPageRoute<void>(
+          MaterialPageRoute(
             fullscreenDialog: true,  //true muestra el diálogo para retornar
             builder: (context) => PatientHome(),
+          ),
+        );
+      }
+      break;
+      case "Datos_Paciente": {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            fullscreenDialog: true,  //true muestra el diálogo para retornar
+            builder: (context) => PatientInformation(),
           ),
         );
       }
@@ -153,7 +180,7 @@ class MenuUserPage extends StatelessWidget {
             children: <Widget>[
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
-                text: 'Cirugía',
+                text: 'Datos Paciente',
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
@@ -161,11 +188,25 @@ class MenuUserPage extends StatelessWidget {
               ),
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
-                text: 'Paciente en Casa',
+                text: 'Cirugía',
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
                 onPressed: () => _navigateToModuleSelected(context, 'Home'),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SelectModuleButton(
+                assetName: 'images/declaracion.png',
+                text: 'Cirugía',
+                colorText: Colors.black87,
+                color: Colors.white,
+                borderRadius: 8.0,
+                onPressed: () => _navigateToModuleSelected(context, 'Datos_Paciente'),
               ),
             ],
           )

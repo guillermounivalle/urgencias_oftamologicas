@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/users/menu_user_page.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 
+import '../services/database.dart';
 import 'home_page.dart';
 
 class LandingPage extends StatelessWidget {
@@ -25,7 +26,10 @@ class LandingPage extends StatelessWidget {
               );
             }
             return
-                MenuUserPage();
+              Provider<Database>(
+                create:(_) => FirestoresDatabase(uid: user.uid),
+                child: MenuUserPage(),
+              );
           }
           return Scaffold(
             body: Center(

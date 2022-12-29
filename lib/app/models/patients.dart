@@ -1,7 +1,5 @@
 
 
-import 'dart:js';
-
 class Patients{
   Patients({
     required this.name,
@@ -21,8 +19,8 @@ class Patients{
   final String socioeconomic;
   final String schooling;
   final String source;
-  final DateTime birthdate;
-  final JsObject age;
+  final String birthdate;
+  final int age;
 
   Map<String, dynamic> toMap(){
     return{
