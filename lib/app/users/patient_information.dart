@@ -1,16 +1,20 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/models/patients.dart';
 import '../../services/database.dart';
 import  'package:intl/intl.dart';
 
+import '../app_navigate/button_options_insert_data.dart';
+import '../app_navigate/select_module_button.dart';
+
 
 class PatientInformation extends StatelessWidget {
-  const PatientInformation({super.key}) ;
+   PatientInformation({super.key}) ;
 
-
+  String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   /**
    * final String name;
       final String lastname;
@@ -37,7 +41,9 @@ class PatientInformation extends StatelessWidget {
             age:25,
             birthdate: cdate));
   }
+  void _ShowCalendar(){
 
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +53,7 @@ class PatientInformation extends StatelessWidget {
       body: SingleChildScrollView(//Evita el desborde de pantalla
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: buildContent(context),
+          child: _buildContent(context),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -56,8 +62,7 @@ class PatientInformation extends StatelessWidget {
       ) ,
     );
   }
-  Container buildContent(BuildContext context){
-
+  Container _buildContent(BuildContext context){
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, //en el eje y
@@ -65,7 +70,7 @@ class PatientInformation extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 40.0),
           Text(
-            'Por favor ingrese los datos del paciente',
+            'Por favor ingres los datos del paciente a Valorar',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontStyle: FontStyle.italic,
@@ -73,7 +78,63 @@ class PatientInformation extends StatelessWidget {
                 fontWeight: FontWeight.w600
             ),
           ),
-          SizedBox(height: 40.0),
+          SizedBox(height: 20.0),
+          Row(
+            children:<Widget>[
+              Expanded(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Documento de Identidad',
+                  ),
+                  keyboardType: TextInputType.number
+                ),
+              ),
+              ButtonOptionsInsertData(
+                assetName: 'images/find.jpg',
+                text: '',
+                colorText: Colors.black87,
+                color: Colors.white,
+                borderRadius: 6.0,
+                onPressed: () {},
+              ),
+            ]
+          ),
+          SizedBox(height: 20.0),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Nombres del Paciente',
+            ),
+          ),
+          SizedBox(height: 20.0),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Apellidos del Paciente',
+            ),
+          ),
+          SizedBox(height: 20.0),
+          Row(
+              children:<Widget>[
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: 'Fecha Nacimiento',
+                    ),
+                  ),
+                ),
+                ButtonOptionsInsertData(
+                  assetName: 'images/calendar.png',
+                  text: '',
+                  colorText: Colors.black87,
+                  color: Colors.white,
+                  borderRadius: 6.0,
+                  onPressed: () => _ShowCalendar(),
+                ),
+              ]
+          ),
         ],
       ),
     );

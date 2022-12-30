@@ -6,8 +6,8 @@ import 'package:urgencias_oftamologicas/services/auth.dart';
 import '../../common_widgets/show_alert_dialog.dart';
 import '../app_navigate/select_module_button.dart';
 
-class PatientAdmission extends StatelessWidget {
-  const PatientAdmission({super.key}) ;
+class InitialEvaluation extends StatelessWidget {
+  const InitialEvaluation({super.key}) ;
 
 
 
@@ -17,16 +17,12 @@ class PatientAdmission extends StatelessWidget {
       appBar: AppBar(
           title: Text('Admisión Paciente'),
       ),
-      body: SingleChildScrollView(//Evita el desborde de pantalla
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: buildContent(context),
-        ),
-      ),
+      body: buildContent(context)
     );
   }
-  Container buildContent(BuildContext context){
 
+
+  Container buildContent(BuildContext context){
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, //en el eje y
@@ -34,7 +30,7 @@ class PatientAdmission extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 40.0),
           Text(
-            'Por favor ingres los datos del paciente a Valorar',
+            'Por favor ingrese la informaciòn del paciente',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontStyle: FontStyle.italic,
@@ -42,7 +38,7 @@ class PatientAdmission extends StatelessWidget {
                 fontWeight: FontWeight.w600
             ),
           ),
-          SizedBox(height: 40.0),
+          SizedBox(height: 20.0),
 
         ],
       ),

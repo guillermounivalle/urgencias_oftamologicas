@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/app_navigate/select_module_button.dart';
-import 'package:urgencias_oftamologicas/app/users/patient_admission.dart';
+import 'package:urgencias_oftamologicas/app/users/initial_evaluation.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_hospitalization.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_surgery.dart';

@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:urgencias_oftamologicas/app/users/patient_admission.dart';
+import 'package:urgencias_oftamologicas/app/users/initial_evaluation.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_hospitalization.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_information.dart';
@@ -61,11 +61,20 @@ class MenuUserPage extends StatelessWidget {
   Future<void> _navigateToModuleSelected(BuildContext context, String module)async{
     //TODO: navigate to module selected
     switch(module) {
-      case "Admission": {
+      case "patient_information": {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => PatientAdmission(),
+            builder: (context) => PatientInformation(),
+          ),
+        );
+      }
+      break;
+      case "initial_evaluation": {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            fullscreenDialog: true,  //true muestra el diálogo para retornar
+            builder: (context) => InitialEvaluation(),
           ),
         );
       }
@@ -81,27 +90,18 @@ class MenuUserPage extends StatelessWidget {
       break;
       case "Surgery": {
         Navigator.of(context).push(
-          MaterialPageRoute<void>(
+          MaterialPageRoute(
             fullscreenDialog: true,  //true muestra el diálogo para retornar
             builder: (context) => PatientSurgery(),
           ),
         );
       }
       break;
-      case "Home": {
+      case "Patient_home": {
         Navigator.of(context).push(
           MaterialPageRoute(
             fullscreenDialog: true,  //true muestra el diálogo para retornar
             builder: (context) => PatientHome(),
-          ),
-        );
-      }
-      break;
-      case "Datos_Paciente": {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => PatientInformation(),
           ),
         );
       }
@@ -158,12 +158,26 @@ class MenuUserPage extends StatelessWidget {
             children: <Widget>[
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
-                text: 'Ingreso Paciente',
+                text: 'Datos del Paciente',
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
-                onPressed: () => _navigateToModuleSelected(context, 'Admission'),
+                onPressed: () => _navigateToModuleSelected(context, 'patient_information'),
               ),
+              SelectModuleButton(
+                assetName: 'images/declaracion.png',
+                text: 'Evaluaciòn Inicial',
+                colorText: Colors.black87,
+                color: Colors.white,
+                borderRadius: 8.0,
+                onPressed: () => _navigateToModuleSelected(context, 'initial_evaluation'),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
                 text: 'Hospitalización',
@@ -172,28 +186,14 @@ class MenuUserPage extends StatelessWidget {
                 borderRadius: 8.0,
                 onPressed: () => _navigateToModuleSelected(context, 'Hospitalization'),
               ),
-            ],
-          ),
-          SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
-                text: 'Datos Paciente',
+                text: 'Cirugía',
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
                 onPressed: () => _navigateToModuleSelected(context, 'Surgery'),
               ),
-              SelectModuleButton(
-                assetName: 'images/declaracion.png',
-                text: 'Cirugía',
-                colorText: Colors.black87,
-                color: Colors.white,
-                borderRadius: 8.0,
-                onPressed: () => _navigateToModuleSelected(context, 'Home'),
-              ),
             ],
           ),
           SizedBox(height: 20.0),
@@ -202,11 +202,11 @@ class MenuUserPage extends StatelessWidget {
             children: <Widget>[
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
-                text: 'Cirugía',
+                text: 'Cuidado en Casa',
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
-                onPressed: () => _navigateToModuleSelected(context, 'Datos_Paciente'),
+                onPressed: () => _navigateToModuleSelected(context, 'Patient_home'),
               ),
             ],
           )
