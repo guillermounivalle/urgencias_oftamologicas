@@ -27,7 +27,7 @@ class LandingPage extends StatelessWidget {
               return HomePage();
             }
             return
-              Provider<Database>(
+              ChangeNotifierProvider<FirestoresDatabase>(
                 create:(_) => FirestoresDatabase(uid: user.uid),
                 child: MenuUserPage(),
               );

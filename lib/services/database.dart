@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,12 +7,12 @@ import 'package:urgencias_oftamologicas/app/models/patients.dart';
 import '../app/models/medical_staff.dart';
 import 'api_path.dart';
 
-abstract class Database {
+abstract class Database  {
   Future<void> addUser(MedicalStaff userData);
   Future<void> addPatient(Patients patients);
 }
 
-class FirestoresDatabase implements Database {
+class FirestoresDatabase extends ChangeNotifier implements Database {
   //Constructor
   FirestoresDatabase({required this.uid}): assert(uid != null);
   final String uid;

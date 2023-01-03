@@ -19,7 +19,7 @@ class MenuUserPage extends StatelessWidget {
 
   Future<void> _inserData_User(BuildContext context) async{
     String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
-    final database = Provider.of<Database>(context, listen: false);
+    final database = Provider.of<FirestoresDatabase>(context, listen: false);
     await database.addPatient(
         Patients(
           name:'Guillermo',
