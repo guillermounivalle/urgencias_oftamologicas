@@ -6,6 +6,7 @@ class FormSumbitButton extends Custom_Button_Select{
   FormSumbitButton({
     required String text,
     required Color colorText,
+    required Color color,
     required VoidCallback? onPressed,
   }) : assert(text != null),
         super(
@@ -13,7 +14,7 @@ class FormSumbitButton extends Custom_Button_Select{
             text,
             style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
-          color: Colors.indigo,
+          color: color,
           colorText: colorText,
           height: 50.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
           //en la clase Custom

@@ -41,7 +41,7 @@ class Custom_Button_Select extends StatelessWidget {
       child: ElevatedButton(
         child: child,
         style: ElevatedButton.styleFrom(
-            primary: color,
+            backgroundColor: color,
             shape: RoundedRectangleBorder(//Border radius button
                 borderRadius: BorderRadius.all(
                     Radius.circular(borderRadius)

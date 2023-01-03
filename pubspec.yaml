@@ -31,7 +31,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
 
   firebase_core_platform_interface: ^4.5.2
 
@@ -48,9 +49,6 @@ dependencies:
   provider: ^6.0.5
   #cloud firestore pluggin
   cloud_firestore: 4.2.0
-
-
-
 
 dev_dependencies:
   flutter_test:

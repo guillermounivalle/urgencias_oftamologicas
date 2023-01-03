@@ -88,6 +88,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       _buildPasswordTextField(),
       SizedBox(height: 8.0),
       FormSumbitButton(
+        color: Colors.blue,
         colorText: Colors.indigo,
         text: primaryText,
         onPressed: submitEnabled ? _submit : null,

@@ -5,6 +5,8 @@ import 'package:urgencias_oftamologicas/services/auth.dart';
 import 'app/home_page.dart';
 import 'app/landing_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 
 
@@ -28,6 +30,14 @@ class MyApp extends StatelessWidget {
     return Provider<AuthBase>(//<AuthBase> Create type Annotation
       create: (context) => Auth(), //(context)Create argument, Auth() object that we need
       child: MaterialApp(
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate
+        ],
+        supportedLocales: [
+          const Locale('en'),
+          const Locale('fr'),
+          const Locale('es')
+        ],
           title: 'Urgencias Oftamológicas', //title app
           theme: ThemeData(//Leer documentaci{on themeData
             primarySwatch: Colors.blue, //primary color of our entire app
