@@ -1,6 +1,5 @@
 
 import 'dart:core';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,18 +8,17 @@ import 'package:urgencias_oftamologicas/app/models/patients.dart';
 import '../../common_widgets/form_submit_button.dart';
 import '../../services/database.dart';
 import  'package:intl/intl.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import '../app_navigate/button_options_insert_data.dart';
-import '../app_navigate/select_module_button.dart';
+
 
 
 class PatientInformation extends StatelessWidget {
    PatientInformation({super.key}) ;
 
-  final List<String> genero =<String> [ 'Seleccionar','Masculino', 'Femenino', 'Otro'];
-  final List<String> escolaridad =<String> [ 'Seleccionar','Primaria', 'Secundaria', 'Pre-Grado', 'Post-Grado'];
-  final List<String> procedencia =<String> [ 'Seleccionar','Urbana', 'Rural'];
-  final List<String> estrato =<String> [ 'Seleccionar','1', '2', '3', '4', '5', '6', '+6'];
+  final List<String> genero =<String> [ '','Masculino', 'Femenino', 'Otro'];
+  final List<String> escolaridad =<String> [ '','Primaria', 'Secundaria', 'Pre-Grado', 'Post-Grado'];
+  final List<String> procedencia =<String> [ '','Urbana', 'Rural'];
+  final List<String> estrato =<String> [ '','1', '2', '3', '4', '5', '6', '+6'];
   DateTime date = DateTime.now();
   String formatdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   /**
@@ -57,7 +55,25 @@ class PatientInformation extends StatelessWidget {
         firstDate: DateTime(1900),
         lastDate: DateTime(2100));
   }
-
+   void _showDialog(BuildContext context) {
+     showDialog(
+       context: context,
+       builder: (BuildContext context) {
+         return AlertDialog(
+           title:  Text("Confirmación"),
+           content:  Text("Los datos del paciente fueron agregados con éxito!"),
+           actions: <Widget>[
+              TextButton(
+               child: Text("OK"),
+               onPressed: () {
+                 Navigator.of(context).pop();
+               },
+             ),
+           ],
+         );
+       },
+     );
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +102,7 @@ class PatientInformation extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 40.0),
           Text(
-            'Por favor ingres los datos del paciente a Valorar',
+            'Por favor ingrese los datos del paciente a valorar',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontStyle: FontStyle.italic,
@@ -105,6 +121,7 @@ class PatientInformation extends StatelessWidget {
                           border: UnderlineInputBorder(),
                           labelText: 'Documento de Identidad',
                         ),
+                        initialValue: '29114523',
                         keyboardType: TextInputType.number
                     ),
                   ),
@@ -127,6 +144,7 @@ class PatientInformation extends StatelessWidget {
                 border: UnderlineInputBorder(),
                 labelText: 'Nombres del Paciente',
               ),
+                initialValue: 'Jhon'
             ),
           ),
           SizedBox(height: 20.0),
@@ -137,6 +155,7 @@ class PatientInformation extends StatelessWidget {
                 border: UnderlineInputBorder(),
                 labelText: 'Apellidos del Paciente',
               ),
+                initialValue: 'Doe'
             ),
           ),
           SizedBox(height: 20.0),
@@ -150,6 +169,7 @@ class PatientInformation extends StatelessWidget {
                         border: UnderlineInputBorder(),
                         labelText: 'Fecha Nacimiento',
                       ),
+                        initialValue: '1983/12/24'
                     ),
                   ),
                   ButtonOptionsInsertData(
@@ -174,6 +194,7 @@ class PatientInformation extends StatelessWidget {
                         border: UnderlineInputBorder(),
                         labelText: 'Genero',
                       ),
+                        initialValue: 'Masculino'
                     ),
                   ),
                   Container(
@@ -226,6 +247,7 @@ class PatientInformation extends StatelessWidget {
                         border: UnderlineInputBorder(),
                         labelText: 'Escolaridad',
                       ),
+                        initialValue: 'Secundaria'
                     ),
                   ),
                   Container(
@@ -277,6 +299,7 @@ class PatientInformation extends StatelessWidget {
                         border: UnderlineInputBorder(),
                         labelText: 'Procedencia',
                       ),
+                        initialValue: 'Urbana'
                     ),
                   ),
                   Container(
@@ -401,7 +424,7 @@ class PatientInformation extends StatelessWidget {
             color: Colors.blue,
             colorText: Colors.black87,
             text: 'Agregar Paciente',
-            onPressed: null,
+            onPressed: () {_showDialog(context);}
           ),
         ],
       ),
