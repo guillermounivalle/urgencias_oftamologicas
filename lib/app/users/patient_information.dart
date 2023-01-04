@@ -12,15 +12,22 @@ import '../app_navigate/button_options_insert_data.dart';
 
 
 
-class PatientInformation extends StatelessWidget {
-   PatientInformation({super.key}) ;
+class PatientInformation extends StatefulWidget {
+  const PatientInformation({super.key});
 
-  final List<String> genero =<String> [ '','Masculino', 'Femenino', 'Otro'];
-  final List<String> escolaridad =<String> [ '','Primaria', 'Secundaria', 'Pre-Grado', 'Post-Grado'];
-  final List<String> procedencia =<String> [ '','Urbana', 'Rural'];
-  final List<String> estrato =<String> [ '','1', '2', '3', '4', '5', '6', '+6'];
+  @override
+  State<PatientInformation> createState() => _PatientInformationState();
+
+}
+
+class _PatientInformationState extends State<PatientInformation> {
+  final List<String> genero = <String>['Seleccionar','Masculino','Femenino','Otro' ];
+  final List<String> escolaridad = <String>['Seleccionar','Primaria','Secundaria','Pre-Grado','Post-Grado' ];
+  final List<String> procedencia = <String>[ 'Seleccionar', 'Urbana', 'Rural'];
+  final List<String> estrato = <String>['Seleccionar','1','2','3','4','5','6','+6' ];
   DateTime date = DateTime.now();
   String formatdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+
   /**
    * final String name;
       final String lastname;
@@ -32,22 +39,23 @@ class PatientInformation extends StatelessWidget {
       final DateTime birthdate;
       final Object age;*/
 
-  Future<void> _inserData_User(BuildContext context) async{
+  Future<void> _inserData_User(BuildContext context) async {
     String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
     final database = Provider.of<FirestoresDatabase>(context, listen: false);
     await database.addPatient(
         Patients(
-            name:'Guillermo',
+            name: 'Guillermo',
             lastname: 'Hernandez',
             documentId: '94064730',
             gender: 'Masculino',
             socioeconomic: '3',
             schooling: 'Primaria',
             source: 'Rural',
-            age:25,
+            age: 25,
             birthdate: cdate));
   }
-  Future<void> _ShowCalendar(BuildContext context) async{
+
+  Future<void> _ShowCalendar(BuildContext context) async {
     DateTime? newDate = await showDatePicker(
         context: context,
         locale: const Locale("es", "LA~C"),
@@ -55,25 +63,26 @@ class PatientInformation extends StatelessWidget {
         firstDate: DateTime(1900),
         lastDate: DateTime(2100));
   }
-   void _showDialog(BuildContext context) {
-     showDialog(
-       context: context,
-       builder: (BuildContext context) {
-         return AlertDialog(
-           title:  Text("Confirmación"),
-           content:  Text("Los datos del paciente fueron agregados con éxito!"),
-           actions: <Widget>[
-              TextButton(
-               child: Text("OK"),
-               onPressed: () {
-                 Navigator.of(context).pop();
-               },
-             ),
-           ],
-         );
-       },
-     );
-   }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Confirmación"),
+          content: Text("Los datos del paciente fueron agregados con éxito!"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +90,7 @@ class PatientInformation extends StatelessWidget {
       appBar: AppBar(
         title: Text('Información del Paciente'),
       ),
-      body: SingleChildScrollView(//Evita el desborde de pantalla
+      body: SingleChildScrollView( //Evita el desborde de pantalla
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: _buildContent(context),
@@ -94,7 +103,8 @@ class PatientInformation extends StatelessWidget {
           ) ,*/
     );
   }
-  Container _buildContent(BuildContext context){
+
+  Container _buildContent(BuildContext context) {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, //en el eje y
@@ -114,7 +124,7 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
                         decoration: InputDecoration(
@@ -140,10 +150,10 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Nombres del Paciente',
-              ),
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Nombres del Paciente',
+                ),
                 initialValue: 'Jhon'
             ),
           ),
@@ -151,10 +161,10 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Apellidos del Paciente',
-              ),
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Apellidos del Paciente',
+                ),
                 initialValue: 'Doe'
             ),
           ),
@@ -162,13 +172,13 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Fecha Nacimiento',
-                      ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Fecha Nacimiento',
+                        ),
                         initialValue: '1983/12/24'
                     ),
                   ),
@@ -187,32 +197,36 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Genero',
-                      ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Genero',
+                        ),
                         initialValue: 'Masculino'
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    width: 250.0,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      width: 250.0,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            color: Colors.blue,
-                            width: 2)
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: Colors.blue,
+                              width: 2)
                       ),
                       child: DropdownButton<String>(
                         value: genero.first,
                         borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white, //dropdown background color
-                        underline: SizedBox(), //remove underline
-                        isExpanded: true, //make true to make width 100%
+                        dropdownColor: Colors.white,
+                        //dropdown background color
+                        underline: SizedBox(),
+                        //remove underline
+                        isExpanded: true,
+                        //make true to make width 100%
                         icon: const Icon(Icons.arrow_drop_down),
                         iconEnabledColor: Colors.blueAccent,
                         elevation: 16,
@@ -224,7 +238,8 @@ class PatientInformation extends StatelessWidget {
                           //dropdownValue = value!;
                           //});
                         },
-                        items: genero.map<DropdownMenuItem<String>>((String value) {
+                        items: genero.map<DropdownMenuItem<String>>((
+                            String value) {
                           return DropdownMenuItem<String>(
                             alignment: Alignment.centerLeft,
                             value: value,
@@ -240,31 +255,35 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Escolaridad',
-                      ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Escolaridad',
+                        ),
                         initialValue: 'Secundaria'
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       width: 250.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: Colors.blue,
-                          width: 2)
+                              width: 2)
                       ),
                       child: DropdownButton<String>(
                         value: escolaridad.first,
                         borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white, //dropdown background color
-                        underline: SizedBox(), //remove underline
-                        isExpanded: true, //make true to make width 100%
+                        dropdownColor: Colors.white,
+                        //dropdown background color
+                        underline: SizedBox(),
+                        //remove underline
+                        isExpanded: true,
+                        //make true to make width 100%
                         icon: const Icon(Icons.arrow_drop_down),
                         iconEnabledColor: Colors.blueAccent,
                         elevation: 16,
@@ -276,7 +295,8 @@ class PatientInformation extends StatelessWidget {
                           //dropdownValue = value!;
                           //});
                         },
-                        items: escolaridad.map<DropdownMenuItem<String>>((String value) {
+                        items: escolaridad.map<DropdownMenuItem<String>>((
+                            String value) {
                           return DropdownMenuItem<String>(
                             alignment: Alignment.centerLeft,
                             value: value,
@@ -292,18 +312,19 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Procedencia',
-                      ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Procedencia',
+                        ),
                         initialValue: 'Urbana'
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       width: 250.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -314,9 +335,12 @@ class PatientInformation extends StatelessWidget {
                       child: DropdownButton<String>(
                         value: procedencia.first,
                         borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white, //dropdown background color
-                        underline: SizedBox(), //remove underline
-                        isExpanded: true, //make true to make width 100%
+                        dropdownColor: Colors.white,
+                        //dropdown background color
+                        underline: SizedBox(),
+                        //remove underline
+                        isExpanded: true,
+                        //make true to make width 100%
                         icon: const Icon(Icons.arrow_drop_down),
                         iconEnabledColor: Colors.blueAccent,
                         elevation: 16,
@@ -328,7 +352,8 @@ class PatientInformation extends StatelessWidget {
                           //dropdownValue = value!;
                           //});
                         },
-                        items: procedencia.map<DropdownMenuItem<String>>((String value) {
+                        items: procedencia.map<DropdownMenuItem<String>>((
+                            String value) {
                           return DropdownMenuItem<String>(
                             alignment: Alignment.centerLeft,
                             value: value,
@@ -344,19 +369,20 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Estrato',
-                      ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Estrato',
+                        ),
                         enabled: false,
                         initialValue: '2'
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       width: 250.0,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -367,9 +393,12 @@ class PatientInformation extends StatelessWidget {
                       child: DropdownButton<String>(
                         value: estrato.first,
                         borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white, //dropdown background color
-                        underline: SizedBox(), //remove underline
-                        isExpanded: true, //make true to make width 100%
+                        dropdownColor: Colors.white,
+                        //dropdown background color
+                        underline: SizedBox(),
+                        //remove underline
+                        isExpanded: true,
+                        //make true to make width 100%
                         icon: const Icon(Icons.arrow_drop_down),
                         iconEnabledColor: Colors.blueAccent,
                         elevation: 16,
@@ -381,7 +410,8 @@ class PatientInformation extends StatelessWidget {
                           //dropdownValue = value!;
                           //});
                         },
-                        items: estrato.map<DropdownMenuItem<String>>((String value) {
+                        items: estrato.map<DropdownMenuItem<String>>((
+                            String value) {
                           return DropdownMenuItem<String>(
                             alignment: Alignment.centerLeft,
                             value: value,
@@ -397,7 +427,7 @@ class PatientInformation extends StatelessWidget {
           Container(
             color: Colors.white10,
             child: Row(
-                children:<Widget>[
+                children: <Widget>[
                   Expanded(
                     child: TextFormField(
                       decoration: InputDecoration(
@@ -418,19 +448,23 @@ class PatientInformation extends StatelessWidget {
                   ),
                 ]
             ),
-            ),
+          ),
           SizedBox(height: 20.0),
           FormSumbitButton(
-            color: Colors.blue,
-            colorText: Colors.black87,
-            text: 'Agregar Paciente',
-            onPressed: () {_showDialog(context);}
+              color: Colors.blue,
+              colorText: Colors.black87,
+              text: 'Agregar Paciente',
+              onPressed: () {
+                _showDialog(context);
+              }
           ),
         ],
       ),
     );
   }
-
 }
+
+
+
 
 
