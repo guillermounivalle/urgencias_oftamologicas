@@ -60,7 +60,7 @@ class _InitialEvaluationState extends State<InitialEvaluation>{
                 ),
                 initialValue: '29114523',
                 keyboardType: TextInputType.number
-            ),view_initial_evaluationview_initial_evaluation
+            ),
           ),
           SizedBox(height: 20.0),
           SizedBox(height: 20.0),

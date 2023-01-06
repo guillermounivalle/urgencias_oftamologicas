@@ -1,35 +1,58 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:urgencias_oftamologicas/services/auth.dart';
-import 'app/home_page.dart';
-import 'app/landing_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:urgencias_oftamologicas/app/infrastructure/ciat.module.dart';
+import 'package:urgencias_oftamologicas/app/infrastructure/router.dart';
+import 'package:urgencias_oftamologicas/app/users/patient.module.dart';
+import 'package:urgencias_oftamologicas/firebase_options.dart';
+import 'package:urgencias_oftamologicas/infrastructure/locator/service.locator.dart';
+import 'package:urgencias_oftamologicas/services/auth.dart';
 
-
-
+import 'app/landing_page.dart';
 
 //define entry point
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //Run Firebase initialize
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   //the main method runApp. Into run App will go the root widget MyApp()
+  setupServiceLocator();
   runApp(MyApp());
 }
 
+List<CIATViewModule> modules = [
+  PatientModule()
+];
 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  final CIATRouter _router = CIATRouter();
+
+  @override
+  void initState() {
+    super.initState();
+    for (final module in modules) {
+      _router.addRoutes(module.routes());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Provider<AuthBase>(//<AuthBase> Create type Annotation
-      create: (context) => Auth(), //(context)Create argument, Auth() object that we need
+      create: (context) => AuthService(), //(context)Create argument, Auth() object that we need
       child: MaterialApp(
+        onGenerateRoute: _router.generateRoute,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate
         ],
@@ -38,11 +61,11 @@ class MyApp extends StatelessWidget {
           const Locale('fr'),
           const Locale('es')
         ],
-          title: 'Urgencias Oftamológicas', //title app
-          theme: ThemeData(//Leer documentaci{on themeData
-            primarySwatch: Colors.blue, //primary color of our entire app
-          ),
-          home: LandingPage(),
+        title: 'Urgencias Oftamológicas', //title app
+        theme: ThemeData(//Leer documentaci{on themeData
+          primarySwatch: Colors.blue, //primary color of our entire app
+        ),
+        home: LandingPage(),
       ), //Llamamos como home a la clase LandingPage
     );
   }

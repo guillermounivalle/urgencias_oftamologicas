@@ -6,6 +6,8 @@ import 'package:urgencias_oftamologicas/app/app.signin/validators.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import '../../common_widgets/form_submit_button.dart';
 import '../../common_widgets/show_alert_dialog.dart';
+import '../../infrastructure/auth/session.model.dart';
+import 'login.view.model.dart';
 
 enum EmailSignInFormType {signIn, register }
 
@@ -29,18 +31,28 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   String get _email => _emailController.text;
   String get _password => _passwordControler.text;
 
+  void _navigateToMenu() {
+    if (OFTSession.isAdmin) {
+      //Todo: cambiar a la ruta de admin
+      Navigator.pushNamed(context, 'home/user');
+    } else {
+      Navigator.pushNamed(context, 'home/user');
+    }
+  }
+
   void _submit() async{
     setState(() {
       _submitted = true; //Cambia a true para que se muestre el texto en rojo en caso de que haya campos vacios
       _isLoading = true;
     });
     try{
-      final auth = Provider.of<AuthBase>(context, listen: false);
+      final model = Provider.of<LoginViewModel>(context, listen: false);
       //await Future.delayed((Duration(seconds: 5)));//Solo para modo desarrollo. Eliminar en producción
       if(_formType == EmailSignInFormType.signIn){
-        await auth.signInWithEmailAndPassword(_email, _password);
+        await model.signIn(_email, _password);
+        _navigateToMenu();
       }else{
-        await auth.createUserWithEmailAndPassword(_email, _password);
+        await model.createUser(_email, _password);
       }
       Navigator.of(context).pop();
     }catch (e){

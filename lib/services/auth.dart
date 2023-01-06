@@ -10,7 +10,7 @@ abstract class AuthBase {
   Future<void> signOut();
 }
 
-class Auth implements AuthBase{
+class AuthService implements AuthBase{
 
   //Se crea una instancia. Una clase Singleton anteriormente
   final _firebaseAuth = FirebaseAuth.instance;
