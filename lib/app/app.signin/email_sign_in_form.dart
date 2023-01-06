@@ -31,14 +31,34 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   String get _email => _emailController.text;
   String get _password => _passwordControler.text;
 
+  /**
+   * Método usado para elegir a que menú navegar
+   * dependiendo si la sesión de usuario indica que es
+   * un usuario administrador o no
+   * */
   void _navigateToMenu() {
     if (OFTSession.isAdmin) {
       //Todo: cambiar a la ruta de admin
-      Navigator.pushNamed(context, 'home/user');
+      _navegateToAdminMenu();
     } else {
-      Navigator.pushNamed(context, 'home/user');
+      _navegateToUserMenu();
     }
   }
+
+  /**
+   * Método usado para navegar al menu de usuario
+   * */
+  void _navegateToUserMenu(){
+    Navigator.pushNamed(context, 'home/user');
+  }
+
+  /**
+   * Método usado para navegar al menu de administrador
+   * */
+  void _navegateToAdminMenu(){
+    Navigator.pushNamed(context, 'home/admin');
+  }
+
 
   void _submit() async{
     setState(() {

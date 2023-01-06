@@ -40,9 +40,14 @@ class MenuUserPage extends StatelessWidget {
     final auth = Provider.of<AuthBase>(context, listen: false);
     try {
       await auth.signOut();
+      _navigateToHomePage(context);
     }catch (e){
       print(e.toString());
     }
+  }
+
+  void _navigateToHomePage(BuildContext context){
+    Navigator.pushNamed(context, 'homepage');
   }
 
   Future<void> _confirmSignOut(BuildContext context) async {
