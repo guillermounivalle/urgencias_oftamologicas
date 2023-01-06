@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/ciat.module.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/router.dart';
+import 'package:urgencias_oftamologicas/app/main.module.dart';
 import 'package:urgencias_oftamologicas/app/users/patient.module.dart';
 import 'package:urgencias_oftamologicas/firebase_options.dart';
 import 'package:urgencias_oftamologicas/infrastructure/locator/service.locator.dart';
@@ -24,7 +25,8 @@ void main() async {
 }
 
 List<CIATViewModule> modules = [
-  PatientModule()
+  PatientModule(),
+  MainModule()
 ];
 
 
@@ -65,7 +67,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(//Leer documentaci{on themeData
           primarySwatch: Colors.blue, //primary color of our entire app
         ),
-        home: LandingPage(),
+       initialRoute: 'homepage',
       ), //Llamamos como home a la clase LandingPage
     );
   }

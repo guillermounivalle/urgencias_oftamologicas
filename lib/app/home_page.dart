@@ -10,14 +10,8 @@ class HomePage extends StatelessWidget {
   const HomePage({ super.key} );
   //final AuthBase auth; //Llamando la clase abstracta creada en auth.dart
 
-  Future<void> _signInWithEmailAndPassword(BuildContext context, String typeUser) async {
-    // TODO: Show EmailSignPage
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        fullscreenDialog: true,  //true muestra el diálogo para retornar
-        builder: (context) => EmailSignPage(typeUser: typeUser),
-      ),
-    );
+  void _navigateToLogin(BuildContext context) {
+    Navigator.pushNamed(context, 'login');
   }
 
 
@@ -100,7 +94,7 @@ class HomePage extends StatelessWidget {
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
-                onPressed: () => _signInWithEmailAndPassword(context, "user"),
+                onPressed: () => _navigateToLogin(context),
               ),
               SelectModuleButton(
                 assetName: 'images/declaracion.png',
@@ -108,7 +102,7 @@ class HomePage extends StatelessWidget {
                 colorText: Colors.black87,
                 color: Colors.white,
                 borderRadius: 8.0,
-                onPressed:  () => _signInWithEmailAndPassword(context, "admin"),
+                onPressed:  () => _navigateToLogin(context),
               ),
             ],
           )

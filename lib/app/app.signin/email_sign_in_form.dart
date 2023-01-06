@@ -54,7 +54,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       }else{
         await model.createUser(_email, _password);
       }
-      Navigator.of(context).pop();
+
     }catch (e){
       print('======> Error emailandpassword method  ' +e.toString());
       showAlertDialog(

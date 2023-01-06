@@ -1,11 +1,13 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgencias_oftamologicas/app/app.signin/login.view.model.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import 'email_sign_in_form.dart';
+import 'package:provider/provider.dart';
 
 class EmailSignPage extends StatelessWidget {
-  const EmailSignPage({ super.key,  required String typeUser});
+  const EmailSignPage({ super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +17,14 @@ class EmailSignPage extends StatelessWidget {
           elevation: 10.0  //Shadow bar. Crea un efecto sombra
       ),
       //Show intention Actions  using "Alt + Enter"
-      body: SingleChildScrollView(//Evita el desborde de pantalla
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Card(
-              child: EmailSignInForm( )
+      body: ChangeNotifierProvider<LoginViewModel>(
+        create: (_) => LoginViewModel(),
+        child: SingleChildScrollView(//Evita el desborde de pantalla
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+                child: EmailSignInForm( )
+            ),
           ),
         ),
       ),
