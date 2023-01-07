@@ -39,8 +39,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   void _navigateToMenu() {
     if (OFTSession.isAdmin) {
       //Todo: cambiar a la ruta de admin
+      print ('=============> 11');
       _navegateToAdminMenu();
     } else {
+      print ('=============> 22');
       _navegateToUserMenu();
     }
   }

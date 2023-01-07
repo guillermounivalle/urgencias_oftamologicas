@@ -13,13 +13,19 @@ class MenuAdminsPage extends StatelessWidget {
 
   //Is not necesary make the Singleton Class
   //FirebaseAuth.instance is a static class
-  Future<void> _signOut(BuildContext context) async{
-  final auth = Provider.of<AuthBase>(context, listen: false);
+  Future<void> _signOut(BuildContext context) async {
+    final auth = Provider.of<AuthBase>(context, listen: false);
     try {
       await auth.signOut();
+      _navigateToHomePage(context);
     }catch (e){
       print(e.toString());
     }
+  }
+
+  void _navigateToHomePage(BuildContext context){
+    Navigator.of(context).pushNamedAndRemoveUntil('homepage', (route) => false);
+    //pushNamedAndRemoveUntil('homepage', (route) => false => false);
   }
 
   Future<void> _confirmSignOut(BuildContext context) async {

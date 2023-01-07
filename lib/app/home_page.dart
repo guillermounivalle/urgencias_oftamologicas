@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
     Navigator.pushNamed(context, 'login');
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
