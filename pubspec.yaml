@@ -51,6 +51,8 @@ dependencies:
   cloud_firestore: 4.2.0
   get_it: ^7.2.0
   json_annotation: ^4.7.0
+  #svg
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +90,10 @@ flutter:
     - images/find.jpg
     - images/calendar.png
     - images/splash.jpg
+    - images/hospital-fill.svg
+    - images/botonmoduloadmin.png
+    - images/botonmodulousuario.png
+    - images/logo-HU_Horizontal_blanco.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -115,3 +121,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Light.ttf

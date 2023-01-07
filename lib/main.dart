@@ -9,6 +9,7 @@ import 'package:urgencias_oftamologicas/app/users/patient.module.dart';
 import 'package:urgencias_oftamologicas/firebase_options.dart';
 import 'package:urgencias_oftamologicas/infrastructure/locator/service.locator.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
+import 'package:urgencias_oftamologicas/styles/color.styles.dart';
 
 import 'app/landing_page.dart';
 
@@ -65,9 +66,9 @@ class _MyAppState extends State<MyApp> {
           const Locale('fr'),
           const Locale('es')
         ],
-        title: 'Urgencias Oftamológicas',//title app
+        title: 'OFT-UV',//title app
         theme: ThemeData(//Leer documentaci{on themeData
-          primarySwatch: Colors.blue, //primary color of our entire app
+          scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire app
         ),
        initialRoute: 'homepage',
       ), //Llamamos como home a la clase LandingPage

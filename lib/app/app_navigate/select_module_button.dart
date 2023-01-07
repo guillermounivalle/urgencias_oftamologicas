@@ -30,8 +30,8 @@ class SelectModuleButton extends Custom_Button_Select {
           borderRadius: borderRadius,
           color: color,
           colorText: colorText,
-          width: 170.0,
-          height: 170.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
+          width: 200,
+          height: 200.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
           //en la clase Custom
           onPressed: onPressed
       );
