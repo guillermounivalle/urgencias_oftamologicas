@@ -41,6 +41,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   final CIATRouter _router = CIATRouter();
 
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +55,7 @@ class _MyAppState extends State<MyApp> {
     return Provider<AuthBase>(//<AuthBase> Create type Annotation
       create: (context) => AuthService(), //(context)Create argument, Auth() object that we need
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: _router.generateRoute,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate
@@ -63,7 +65,7 @@ class _MyAppState extends State<MyApp> {
           const Locale('fr'),
           const Locale('es')
         ],
-        title: 'Urgencias Oftamológicas', //title app
+        title: 'Urgencias Oftamológicas',//title app
         theme: ThemeData(//Leer documentaci{on themeData
           primarySwatch: Colors.blue, //primary color of our entire app
         ),
