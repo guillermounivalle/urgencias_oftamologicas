@@ -16,7 +16,8 @@ class FormSumbitButton extends Custom_Button_Select{
           ),
           color: color,
           colorText: colorText,
-          height: 50.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
+          width: 350,
+          height: 70.0, //Aqui le damos el valor a la altura, sino se lo damos, toma por defecto el seteado
           //en la clase Custom
           onPressed: onPressed
       );

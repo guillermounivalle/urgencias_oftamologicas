@@ -17,7 +17,6 @@ class CustomImageButtonSelect extends StatelessWidget {
     this.height: 10.0,
     this.width: 10.0,
     this.text: "",
-    this.heightfactor: 6,
     required this.assetName,
     required this.onPressed,
   }) : assert(borderRadius != null);
@@ -28,7 +27,6 @@ class CustomImageButtonSelect extends StatelessWidget {
   final double borderRadius;
   final double height;
   final double width;
-  final double heightfactor;
   final VoidCallback? onPressed;
 
 
@@ -53,7 +51,7 @@ class CustomImageButtonSelect extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   //fontStyle: FontStyle.italic,
                   fontSize: 22.0,
                   color: Colors.white

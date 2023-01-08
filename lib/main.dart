@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/ciat.module.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/router.dart';
 import 'package:urgencias_oftamologicas/app/main.module.dart';
-import 'package:urgencias_oftamologicas/app/users/patient.module.dart';
+import 'package:urgencias_oftamologicas/app/users/user.modules.dart';
 import 'package:urgencias_oftamologicas/firebase_options.dart';
 import 'package:urgencias_oftamologicas/infrastructure/locator/service.locator.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
@@ -25,8 +25,8 @@ void main() async {
   runApp(MyApp());
 }
 
-List<CIATViewModule> modules = [
-  PatientModule(),
+List<OFTViewModule> modules = [
+  UserModules(),
   MainModule()
 ];
 
@@ -75,13 +75,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-/**
- * MaterialApp(
-    title: 'Urgencias Oftamológicas',
-    theme: ThemeData(
-    primarySwatch: Colors.blue,
-    ),
-    home: LandingPage(
-    ),
-    );*/

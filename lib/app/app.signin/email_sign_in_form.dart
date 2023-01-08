@@ -2,8 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:urgencias_oftamologicas/app/app.signin/validators.dart';
+import 'package:urgencias_oftamologicas/app/validators/validators.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
+import 'package:urgencias_oftamologicas/styles/color.styles.dart';
 import '../../common_widgets/form_submit_button.dart';
 import '../../common_widgets/show_alert_dialog.dart';
 import '../../infrastructure/auth/session.model.dart';
@@ -11,7 +12,7 @@ import 'login.view.model.dart';
 
 enum EmailSignInFormType {signIn, register }
 
-class EmailSignInForm extends StatefulWidget with EmailAndPasswordValidators{ //mixin
+class EmailSignInForm extends StatefulWidget with EmptyFieldValidators{ //mixin
 
   @override
   _EmailSignInFormState createState()=> _EmailSignInFormState();
@@ -37,7 +38,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
    * un usuario administrador o no
    * */
   void _navigateToMenu() {
-    if (OFTSession.isAdmin) {
+    if (!OFTSession.isAdmin) {
       //Todo: cambiar a la ruta de admin
       print ('=============> 11');
       _navegateToAdminMenu();
@@ -92,44 +93,72 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     }
   }
 
+  void _NavigateToCreateAcount() {
+    Navigator.of(context).pushNamedAndRemoveUntil('register_account', (route) => false);
+  }
+
   void _emailEditingComplete(){
     final newFocus = widget.emailValidator.isValid(_email)
-        ? _passwordFocusNode : _emailFocusNode; //hasta que no est{e correctamente en el campo eail, no pasa al password
+        ? _passwordFocusNode : _emailFocusNode; //hasta que no esté correctamente en el campo email, no pasa al password
     FocusScope.of(context).requestFocus(newFocus);
   }
 
   void _toggleFormType(){
-    setState(() {
-      _submitted = false;
-      _formType = _formType == EmailSignInFormType.signIn ?
-      EmailSignInFormType.register : EmailSignInFormType.signIn;
-    });
+    _NavigateToCreateAcount();
     _emailController.clear();
     _passwordControler.clear();
   }
 
+  void _resetPassword(){
+    Navigator.pushNamed(context, 'reset_password');
+  }
+
   List<Widget> _builChildren(){
     final primaryText = _formType == EmailSignInFormType.signIn ?
-    'Sign in' : 'Create an account';
+    'Ingresar' : 'crear una Cuenta';
     final secundarytext = _formType == EmailSignInFormType.signIn ?
-    'Need an Account? Register' : 'Have an Account? Sign in';
+    'Necesita una Cuenta? Registrese' : 'Tiene usted una cuenta? Ingresar';
     bool submitEnabled = widget.emailValidator.isValid(_email) &&
         widget.passwordValidator.isValid(_password) && !_isLoading;
 
     return [
       _buildEmailTextField(),
-      SizedBox(height: 8.0),
+      SizedBox(height: 15.0),
       _buildPasswordTextField(),
-      SizedBox(height: 8.0),
+      Container(
+        alignment: Alignment.topLeft,
+        child: TextButton(
+            child: Text(
+              'Olvido su Contraseña?' ,
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w200,
+                  fontSize: 9.0,
+                  color: Colors.white
+              ),
+            ),
+            onPressed: _resetPassword
+        ),
+      ),
+      SizedBox(height: 10.0),
       FormSumbitButton(
-        color: Colors.blue,
+        color: ColorStyles.buttonlogincolorprimary,
         colorText: Colors.indigo,
         text: primaryText,
         onPressed: submitEnabled ? _submit : null,
       ),
       SizedBox(height: 8.0),
       TextButton(
-        child: Text(secundarytext),
+        child: Text(
+            secundarytext,
+          style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w200,
+              //fontStyle: FontStyle.italic,
+              fontSize: 16.0,
+              color: Colors.white
+          ),
+        ),
         onPressed: !_isLoading ? _toggleFormType : null,
       ),
     ];
@@ -142,8 +171,20 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       controller: _passwordControler,
       focusNode: _passwordFocusNode,
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
         enabled: _isLoading == false,
-        labelText: 'password',
+        labelText: 'Password',
+        labelStyle: TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w100,
+            color: Colors.white//FocusNode. ? Colors.blue : Colors.black
+        ),
         errorText: showErrorText ? widget.invalidPasswordErrorText: null,
       ),
       obscureText: true,
@@ -159,9 +200,20 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       controller: _emailController,
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
         enabled: _isLoading == false,
         labelText: 'Email',
-        hintText: 'test@test.com',
+        labelStyle: TextStyle(
+          fontSize: 15.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
+        ),
         errorText: showErrorText ? widget.invalidEmailErrorText : null,
       ),
       autocorrect: false,  // no trabaja el autocorrector
@@ -174,14 +226,10 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min, //Tamaño ocupado por el componente, por defecto es max
-        children: _builChildren(),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min, //Tamaño ocupado por el componente, por defecto es max
+      children: _builChildren(),
     );
   }
 

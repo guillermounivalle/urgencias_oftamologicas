@@ -5,7 +5,7 @@ import 'package:urgencias_oftamologicas/common/error.widget.dart';
 
 class CIATRouter {
   static Route? currentRoute;
-  List<CIATRoute> _appRoutes = [];
+  List<OFTRoute> _appRoutes = [];
   final _errorBuilder = (_) => OFTErrorWidget.of("Ruta desconocida");
 
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -25,7 +25,7 @@ class CIATRouter {
     return currentRoute!;
   }
 
-  void addRoutes(List<CIATRoute> routes) {
+  void addRoutes(List<OFTRoute> routes) {
     _appRoutes.addAll(routes);
   }
 }

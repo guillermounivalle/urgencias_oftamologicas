@@ -25,7 +25,6 @@ class MenuAdminsPage extends StatelessWidget {
 
   void _navigateToHomePage(BuildContext context){
     Navigator.of(context).pushNamedAndRemoveUntil('homepage', (route) => false);
-    //pushNamedAndRemoveUntil('homepage', (route) => false => false);
   }
 
   Future<void> _confirmSignOut(BuildContext context) async {

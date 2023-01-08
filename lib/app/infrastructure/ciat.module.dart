@@ -1,9 +1,9 @@
 import 'package:urgencias_oftamologicas/app/infrastructure/router.model.dart';
 
-abstract class CIATViewModule {
-  List<CIATViewModule> imports() {
+abstract class OFTViewModule {
+  List<OFTViewModule> imports() {
     return [];
   }
 
-  List<CIATRoute> routes();
+  List<OFTRoute> routes();
 }

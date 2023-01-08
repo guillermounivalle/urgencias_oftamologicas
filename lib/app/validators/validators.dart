@@ -19,9 +19,11 @@ class NonEmptyStringValidator implements StringValidator{
 }
 
 
-class EmailAndPasswordValidators {
+class EmptyFieldValidators {
   final StringValidator emailValidator = NonEmptyStringValidator();
   final StringValidator passwordValidator = NonEmptyStringValidator();
-  final String invalidEmailErrorText = 'Email can\'t be empty';
-  final String invalidPasswordErrorText = 'Password can\'t be empty';
+  final StringValidator nameValidator = NonEmptyStringValidator();
+  final String invalidEmailErrorText = 'Email no puede ser un campo vacio';
+  final String invalidPasswordErrorText = 'Contraseña no puede ser un campo vacio';
+  final String invalidNameErrortext = 'El campo Nombre no puede ser vacio';
 }

@@ -23,6 +23,5 @@ class SelectModuleImageButton extends CustomImageButtonSelect {
           text: text,
           width: 500.0,
           height: 200.0,
-          heightfactor: 5.5
       );
 }

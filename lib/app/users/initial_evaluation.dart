@@ -7,14 +7,14 @@ import 'package:urgencias_oftamologicas/services/auth.dart';
 import '../../common_widgets/show_alert_dialog.dart';
 import '../app_navigate/select_module_button.dart';
 
-class InitialEvaluation extends StatefulWidget {
-  const InitialEvaluation({super.key}) ;
+class InitialEvaluationPatient extends StatefulWidget {
+  const InitialEvaluationPatient({super.key}) ;
 
   @override
-  State<InitialEvaluation> createState() => _InitialEvaluationState();
+  State<InitialEvaluationPatient> createState() => _InitialEvaluationPatientState();
 }
 
-class _InitialEvaluationState extends State<InitialEvaluation>{
+class _InitialEvaluationPatientState extends State<InitialEvaluationPatient>{
   final List<String> ojo_afectado = <String>['Seleccionar','Izquierdo','Derecho','Ambos' ];
   final List<String> patologia = <String>['Seleccionar','Izquierdo','Derecho','Ambos' ];
 

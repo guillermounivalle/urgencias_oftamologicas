@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 typedef WidgetFactory = WidgetBuilder Function(RouteSettings settings);
 
-class CIATRoute {
+class OFTRoute {
   String path;
   WidgetFactory component;
 
-  CIATRoute(this.path, this.component);
+  OFTRoute(this.path, this.component);
 }

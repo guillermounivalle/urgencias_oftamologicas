@@ -11,6 +11,7 @@ import 'package:urgencias_oftamologicas/app/users/patient_surgery.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import '../../common_widgets/show_alert_dialog.dart';
 import '../../services/database.dart';
+import '../app.signin/signout.dart';
 import '../app_navigate/select_module_button.dart';
 import '../models/patients.dart';
 import  'package:intl/intl.dart';
@@ -34,36 +35,6 @@ class MenuUserPage extends StatelessWidget {
          ));
   }
 
-  //Is not necesary make the Singleton Class
-  //FirebaseAuth.instance is a static class
-  Future<void> _signOut(BuildContext context) async {
-    final auth = Provider.of<AuthBase>(context, listen: false);
-    try {
-      await auth.signOut();
-      _navigateToHomePage(context);
-    }catch (e){
-      print(e.toString());
-    }
-  }
-
-  void _navigateToHomePage(BuildContext context){
-    Navigator.of(context).pushNamedAndRemoveUntil('homepage', (route) => false);
-    //pushNamedAndRemoveUntil('homepage', (route) => false => false);
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await showAlertDialog(
-        context,
-        title: 'Logout',
-        content: 'Are you sure that you want to logout?',
-        defaultActionText: 'OK',
-        cancelActionText: 'Cancel'
-    );
-    if (didRequestSignOut == true){
-      _signOut(context);
-    }
-  }
-
   Future<void> _navigateToModuleSelected(BuildContext context, String module)async{
     //TODO: navigate to module selected
     switch(module) {
@@ -80,7 +51,7 @@ class MenuUserPage extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => InitialEvaluation(),
+            builder: (context) => InitialEvaluationPatient(),
           ),
         );
       }
@@ -130,7 +101,7 @@ class MenuUserPage extends StatelessWidget {
                 primary: Colors.white,
               ),
               child: new Text('Logout', style: TextStyle( fontSize: 18.0),),
-              onPressed: () => _confirmSignOut(context),
+              onPressed: () => confirmSignOut(context),
             )
           ]
       ),
