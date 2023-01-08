@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.urgencias_oftamologicas">
    <application
-        android:label="urgencias_oftamologicas"
+        android:label="OFT-UV"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
