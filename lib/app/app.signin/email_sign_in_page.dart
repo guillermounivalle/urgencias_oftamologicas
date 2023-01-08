@@ -31,7 +31,7 @@ class EmailSignPage extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                height: 200,
+                height: 220,
                 child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
               ),
               SizedBox(height: 10.0),

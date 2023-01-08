@@ -23,6 +23,7 @@ void _navigateToHomePage(BuildContext context){
 }
 
 Future<void> confirmSignOut(BuildContext context) async {
+  print('========> llama a signoutconfirm');
   final didRequestSignOut = await showAlertDialog(
       context,
       title: 'Logout',

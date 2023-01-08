@@ -94,6 +94,12 @@ flutter:
     - images/botonmoduloadmin.png
     - images/botonmodulousuario.png
     - images/logo-HU_Horizontal_blanco.png
+    - images/person-fill.svg
+    - images/house-check-fill.svg
+    - images/check-circle-fill.svg
+    - images/clipboard-data-fill.svg
+    - images/file-medical-fill.svg
+    - images/x-circle-fill.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

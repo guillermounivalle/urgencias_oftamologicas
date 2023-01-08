@@ -1,21 +1,14 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:urgencias_oftamologicas/app/app_navigate/select_module_button.dart';
-import 'package:urgencias_oftamologicas/styles/color.styles.dart';
-
 import 'app_navigate/select_module_image_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({ super.key} );
-  //final AuthBase auth; //Llamando la clase abstracta creada en auth.dart
 
   void _navigateToLogin(BuildContext context) {
     Navigator.pushNamed(context, 'login');
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +30,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch, //en el eje x
         children: <Widget>[
           Container(
-            height: 180,
+            height: 220,
             child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
           ),
           SizedBox(height: 10.0),

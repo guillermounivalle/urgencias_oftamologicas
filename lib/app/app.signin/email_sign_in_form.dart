@@ -38,12 +38,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
    * un usuario administrador o no
    * */
   void _navigateToMenu() {
-    if (!OFTSession.isAdmin) {
-      //Todo: cambiar a la ruta de admin
-      print ('=============> 11');
+    if (OFTSession.isAdmin) {
       _navegateToAdminMenu();
     } else {
-      print ('=============> 22');
       _navegateToUserMenu();
     }
   }
@@ -52,14 +49,14 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
    * Método usado para navegar al menu de usuario
    * */
   void _navegateToUserMenu(){
-    Navigator.pushNamed(context, 'home/user');
+    Navigator.of(context).pushNamedAndRemoveUntil('home/user',(route) => false);
   }
 
   /**
    * Método usado para navegar al menu de administrador
    * */
   void _navegateToAdminMenu(){
-    Navigator.pushNamed(context, 'home/admin');
+    Navigator.of(context).pushNamedAndRemoveUntil('home/admin',(route) => false);
   }
 
 
@@ -168,6 +165,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     //true           //false
     bool showErrorText = _submitted && !widget.passwordValidator.isValid(_password);
     return TextField(
+      style: TextStyle(
+        fontSize: 20.0,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w100,
+        color: Colors.white
+      ),
       controller: _passwordControler,
       focusNode: _passwordFocusNode,
       decoration: InputDecoration(
@@ -187,7 +190,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
         ),
         errorText: showErrorText ? widget.invalidPasswordErrorText: null,
       ),
-      obscureText: true,
+      obscureText: false,
       textInputAction: TextInputAction.done,
       onChanged: (password) => _updateState(),
       onEditingComplete: _submit,
@@ -197,6 +200,12 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   TextField _buildEmailTextField() {
     bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
     return TextField(
+      style: TextStyle(
+        fontSize: 20.0,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w100,
+        color: Colors.white
+      ),
       controller: _emailController,
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
