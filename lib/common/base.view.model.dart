@@ -5,7 +5,8 @@ import 'package:urgencias_oftamologicas/common/failure.model.dart';
 
 enum NotifierState { initial, loading, loaded }
 
-abstract class BaseViewModel extends ChangeNotifier {
+abstract class
+BaseViewModel extends ChangeNotifier {
   NotifierState _state = NotifierState.initial;
   Failure? _failure;
 

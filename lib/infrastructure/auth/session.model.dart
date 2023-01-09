@@ -12,4 +12,7 @@ class OFTSession  {
     _userSession = userSession;
     _authorization = authorization;
   }
+  static void setSessionOnlyCreateAccount(User userSession) {
+    _userSession = userSession;
+  }
 }

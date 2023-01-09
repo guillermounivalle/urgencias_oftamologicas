@@ -3,7 +3,7 @@ import 'package:urgencias_oftamologicas/app/infrastructure/progress-dialog.widge
 import 'package:urgencias_oftamologicas/app/infrastructure/router.model.dart';
 import 'package:urgencias_oftamologicas/common/error.widget.dart';
 
-class CIATRouter {
+class OFTRouter {
   static Route? currentRoute;
   List<OFTRoute> _appRoutes = [];
   final _errorBuilder = (_) => OFTErrorWidget.of("Ruta desconocida");

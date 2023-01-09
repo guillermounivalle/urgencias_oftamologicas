@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/app.signin/login.view.model.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import '../../styles/color.styles.dart';
-import 'email_sign_in_form.dart';
+import 'forms/email_sign_in_form.dart';
 import 'package:provider/provider.dart';
 
 class EmailSignPage extends StatelessWidget {
@@ -17,6 +17,16 @@ class EmailSignPage extends StatelessWidget {
         preferredSize: Size.fromHeight(60.0),
         child: AppBar(//Leer documentación
           backgroundColor: ColorStyles.appbarprimarycolor,//Title bar
+          centerTitle: true,
+          title: Text(
+            'LOGIN',
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w100,
+                fontSize: 17.0,
+                color: Colors.white
+            ),
+          ),
         ),
       ),
       //Show intention Actions  using "Alt + Enter"
@@ -30,8 +40,8 @@ class EmailSignPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                height: 220,
+                padding: const EdgeInsets.fromLTRB(0, 5.0, 0, 0),
+                height: 200,
                 child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
               ),
               SizedBox(height: 10.0),

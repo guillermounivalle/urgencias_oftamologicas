@@ -2,11 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/app/app.signin/login.view.model.dart';
+import 'package:urgencias_oftamologicas/app/app.signin/forms/register_account_form.dart';
+import 'package:urgencias_oftamologicas/app/app.signin/register.view.model.dart';
 import '../../styles/color.styles.dart';
-import 'email_sign_in_form.dart';
 import 'package:provider/provider.dart';
 
-import 'signout.dart';
 
 class RegisterAccountPage extends StatelessWidget {
   const RegisterAccountPage({ super.key});
@@ -18,62 +18,59 @@ class RegisterAccountPage extends StatelessWidget {
         preferredSize: Size.fromHeight(60.0),
         child: AppBar(//Leer documentación
           backgroundColor: ColorStyles.appbarprimarycolor,//Title bar
-        ),
-      ),
-      //Show intention Actions  using "Alt + Enter"
-      body: ChangeNotifierProvider<LoginViewModel>(
-        create: (_) => LoginViewModel(),
-        child: SingleChildScrollView(//Evita el desborde de pantalla
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center, //en el eje y
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                  height: 200,
-                  child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
-                ),
-                SizedBox(height: 10.0),
-                Text(
-                  'Por favor ingrese sus datos',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w200,
-                      //fontStyle: FontStyle.italic,
-                      fontSize: 22.0,
-                      color: Colors.white
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                SingleChildScrollView(//Evita el desborde de pantalla
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                      child: TextButton(
-                        child: Text(
-                          'Navegar a HomePAge',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w200,
-                              //fontStyle: FontStyle.italic,
-                              fontSize: 16.0,
-                              color: Colors.white
-                          ),
-                        ),
-                        onPressed: () =>  Navigator.of(context).pushNamedAndRemoveUntil('homepage', (route) => false)
-
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+          centerTitle: true,
+          title: Text(
+            'REGISTRAR CUENTA',
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w100,
+                fontSize: 17.0,
+                color: Colors.white
             ),
           ),
         ),
+      ),
+      //Show intention Actions  using "Alt + Enter"
+      body: ChangeNotifierProvider<RegisterAccountModel>(
+        create: (_) => RegisterAccountModel(),
+        child: Scrollbar(
+          thickness: 10,
+          child: SingleChildScrollView(//Evita el desborde de pantalla
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 16.0),
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center, //en el eje y
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0),
+                    height: 200,
+                    child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    'Por favor registre sus datos',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w200,
+                        //fontStyle: FontStyle.italic,
+                        fontSize: 22.0,
+                        color: Colors.white
+                    ),
+                  ),
+                  SingleChildScrollView(//Evita el desborde de pantalla
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: RegisterAccountForm(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
 
+        )
       ),
     );
   }

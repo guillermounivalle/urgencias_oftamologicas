@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/validators/validators.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
 import 'package:urgencias_oftamologicas/styles/color.styles.dart';
-import '../../common_widgets/form_submit_button.dart';
-import '../../common_widgets/show_alert_dialog.dart';
-import '../../infrastructure/auth/session.model.dart';
-import 'login.view.model.dart';
+import '../../../common_widgets/form_submit_button.dart';
+import '../../../common_widgets/show_alert_dialog.dart';
+import '../../../infrastructure/auth/session.model.dart';
+import '../login.view.model.dart';
 
 enum EmailSignInFormType {signIn, register }
 
@@ -28,7 +28,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   bool _submitted = false;  // Inicia en false para que el texto en rojo de mensaje de error no aparezca al inicio
   bool _isLoading = false;  // pasa a true mientras carga
 
-  //variable que se env{ia a firebase
+  //variable que se envía a firebase
   String get _email => _emailController.text;
   String get _password => _passwordControler.text;
 
@@ -68,18 +68,13 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     try{
       final model = Provider.of<LoginViewModel>(context, listen: false);
       //await Future.delayed((Duration(seconds: 5)));//Solo para modo desarrollo. Eliminar en producción
-      if(_formType == EmailSignInFormType.signIn){
-        await model.signIn(_email, _password);
-        _navigateToMenu();
-      }else{
-        await model.createUser(_email, _password);
-      }
-
+      await model.signIn(_email, _password);
+      _navigateToMenu();
     }catch (e){
       print('======> Error emailandpassword method  ' +e.toString());
       showAlertDialog(
           context,
-          title: 'Sign In Failed',
+          title: 'Login no fue posible',
           content: e.toString(),
           defaultActionText: 'OK'
       );
@@ -91,7 +86,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
   }
 
   void _NavigateToCreateAcount() {
-    Navigator.of(context).pushNamedAndRemoveUntil('register_account', (route) => false);
+    Navigator.pushNamed(context, 'register_account');
   }
 
   void _emailEditingComplete(){
@@ -114,7 +109,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     final primaryText = _formType == EmailSignInFormType.signIn ?
     'Ingresar' : 'crear una Cuenta';
     final secundarytext = _formType == EmailSignInFormType.signIn ?
-    'Necesita una Cuenta? Registrese' : 'Tiene usted una cuenta? Ingresar';
+    'Necesita una Cuentas? Registrate' : 'Tiene usted una cuenta? Ingresar';
     bool submitEnabled = widget.emailValidator.isValid(_email) &&
         widget.passwordValidator.isValid(_password) && !_isLoading;
 

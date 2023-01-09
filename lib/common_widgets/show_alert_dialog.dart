@@ -12,12 +12,15 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../app/app.signin/signout.dart';
+
 Future showAlertDialog(
     BuildContext context, {
       required String title,
       required String content,
       required String defaultActionText,
       String? cancelActionText,
+      String? action,
     }){
   if (!Platform.isIOS){
     return showDialog(
@@ -31,10 +34,16 @@ Future showAlertDialog(
                 child: Text(cancelActionText),
                 onPressed:  () => Navigator.of(context).pop(false),
               ),
+            if(defaultActionText == 'OK')
             TextButton(
               child: Text(defaultActionText),
               onPressed:  () => Navigator.of(context).pop(true),
             ),
+            if(defaultActionText == 'TERMINAR')
+              TextButton(
+                child: Text(defaultActionText),
+                onPressed:  () => signOut(context),
+              ),
           ],
         )
     );
@@ -50,10 +59,16 @@ Future showAlertDialog(
               child: Text(cancelActionText),
               onPressed:  () => Navigator.of(context).pop(false),
             ),
-          CupertinoDialogAction(
-            child: Text(defaultActionText),
-            onPressed:  () => Navigator.of(context).pop(true),
-          ),
+          if(defaultActionText == 'OK')
+            CupertinoDialogAction(
+              child: Text(defaultActionText),
+              onPressed:  () => Navigator.of(context).pop(true),
+            ),
+          if(defaultActionText == 'TERMINAR')
+            CupertinoDialogAction(
+              child: Text(defaultActionText),
+              onPressed:  () => signOut,
+            ),
         ],
       )
   );

@@ -1,4 +1,4 @@
-import 'package:urgencias_oftamologicas/app/infrastructure/ciat.module.dart';
+import 'package:urgencias_oftamologicas/app/infrastructure/oft.module.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/router.model.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_hospitalization.dart';

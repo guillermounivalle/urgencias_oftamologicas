@@ -2,16 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:urgencias_oftamologicas/app/infrastructure/ciat.module.dart';
+import 'package:urgencias_oftamologicas/app/infrastructure/oft.module.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/router.dart';
 import 'package:urgencias_oftamologicas/app/main.module.dart';
 import 'package:urgencias_oftamologicas/app/users/user.modules.dart';
 import 'package:urgencias_oftamologicas/firebase_options.dart';
 import 'package:urgencias_oftamologicas/infrastructure/locator/service.locator.dart';
 import 'package:urgencias_oftamologicas/services/auth.dart';
+import 'package:urgencias_oftamologicas/services/database.dart';
 import 'package:urgencias_oftamologicas/styles/color.styles.dart';
 
-import 'app/landing_page.dart';
 
 //define entry point
 void main() async {
@@ -22,7 +22,10 @@ void main() async {
   );
   //the main method runApp. Into run App will go the root widget MyApp()
   setupServiceLocator();
-  runApp(MyApp());
+  runApp(
+      ListenableProvider(
+        create: (context) => FirestoresDatabase(),child: MyApp(), )
+  );
 }
 
 List<OFTViewModule> modules = [
@@ -40,7 +43,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  final CIATRouter _router = CIATRouter();
+  final OFTRouter _router = OFTRouter();
 
 
   @override
@@ -54,24 +57,27 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Provider<AuthBase>(//<AuthBase> Create type Annotation
-      create: (context) => AuthService(), //(context)Create argument, Auth() object that we need
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: _router.generateRoute,
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate
-        ],
-        supportedLocales: [
-          const Locale('en'),
-          const Locale('fr'),
-          const Locale('es')
-        ],
-        title: 'OFT-UV',//title app
-        theme: ThemeData(//Leer documentaci{on themeData
-          scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire app
+      create: (context) => AuthService(),
+      child: Provider<FirestoresDatabase>(
+        create: (context) => FirestoresDatabase(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: _router.generateRoute,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate
+          ],
+          supportedLocales: [
+            const Locale('en'),
+            const Locale('fr'),
+            const Locale('es')
+          ],
+          title: 'OFT-UV',//title app
+          theme: ThemeData(//Leer documentaci{on themeData
+            scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire app
+          ),
+          initialRoute: 'homepage',
         ),
-       initialRoute: 'homepage',
-      ), //Llamamos como home a la clase LandingPage
+      ),//(context)Create argument, Auth() object that we need
     );
   }
 }

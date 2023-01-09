@@ -8,7 +8,7 @@ import '../../services/auth.dart';
 
 //Is not necesary make the Singleton Class
 //FirebaseAuth.instance is a static class
-Future<void> _signOut(BuildContext context) async {
+Future<void> signOut(BuildContext context) async {
   final auth = Provider.of<AuthBase>(context, listen: false);
   try {
     await auth.signOut();
@@ -32,6 +32,6 @@ Future<void> confirmSignOut(BuildContext context) async {
       cancelActionText: 'Cancelar'
   );
   if (didRequestSignOut == true){
-    _signOut(context);
+    signOut(context);
   }
 }

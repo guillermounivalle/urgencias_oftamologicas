@@ -1,5 +1,5 @@
 import 'package:urgencias_oftamologicas/app/admins/menu_admin_page.dart';
-import 'package:urgencias_oftamologicas/app/infrastructure/ciat.module.dart';
+import 'package:urgencias_oftamologicas/app/infrastructure/oft.module.dart';
 import 'package:urgencias_oftamologicas/app/infrastructure/router.model.dart';
 import 'package:urgencias_oftamologicas/app/users/menu_user_page.dart';
 
