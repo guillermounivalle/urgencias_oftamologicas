@@ -146,7 +146,6 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
           style: TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w200,
-              //fontStyle: FontStyle.italic,
               fontSize: 16.0,
               color: Colors.white
           ),

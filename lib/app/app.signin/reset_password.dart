@@ -30,6 +30,12 @@ class _ResetPassword extends State<ResetPassword> {
   TextField _buildEmailTextField() {
     bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
     return TextField(
+      style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
+      ),
       controller: _emailController,
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
@@ -51,7 +57,7 @@ class _ResetPassword extends State<ResetPassword> {
       ),
       autocorrect: false,  // no trabaja el autocorrector
       keyboardType: TextInputType.emailAddress, //teclado para email
-      textInputAction: TextInputAction.next, //Teclado salta a la siguiente linea
+      textInputAction: TextInputAction.done, //Teclado salta a la siguiente linea
       onChanged: (email) => _updateState(),
       onEditingComplete: _emailEditingComplete,// cuando esté completo el campo, pasa a campos del password
     );

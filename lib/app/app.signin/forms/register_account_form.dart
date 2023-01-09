@@ -70,7 +70,7 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
     showAlertDialog(
       context,
       action: 'successful',
-      title: 'Registro Exitos',
+      title: 'Registro Exitoso',
       content: 'La cuenta se ha registrado con éxito\n'
           'Muy pronto un administrador activará la cuenta',
       defaultActionText: 'TERMINAR',
@@ -168,7 +168,7 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
             fontSize: 15.0,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w100,
-            color: Colors.white
+            color: Colors.white//FocusNode. ? Colors.blue : Colors.black
         ),
         errorText: showErrorText ? widget.invalidDocumentIdErrorText : null,
       ),
