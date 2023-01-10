@@ -20,7 +20,6 @@ Future showAlertDialog(
       required String content,
       required String defaultActionText,
       String? cancelActionText,
-      String? action,
     }){
   if (!Platform.isIOS){
     return showDialog(
@@ -34,7 +33,7 @@ Future showAlertDialog(
                 child: Text(cancelActionText),
                 onPressed:  () => Navigator.of(context).pop(false),
               ),
-            if(defaultActionText == 'OK')
+            if(defaultActionText == 'OK' || defaultActionText== 'SALIR')
             TextButton(
               child: Text(defaultActionText),
               onPressed:  () => Navigator.of(context).pop(true),

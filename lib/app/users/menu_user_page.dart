@@ -6,11 +6,13 @@ import 'package:urgencias_oftamologicas/app/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_hospitalization.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_information.dart';
 import 'package:urgencias_oftamologicas/app/users/patient_surgery.dart';
+import 'package:urgencias_oftamologicas/common_widgets/test_class.dart';
 import '../../services/database.dart';
 import '../../styles/color.styles.dart';
 import '../app.signin/login.view.model.dart';
 import '../app.signin/signout.dart';
 import '../app_navigate/select_module_button.dart';
+import '../models/initial_evaluation.dart';
 import '../models/patients.dart';
 import  'package:intl/intl.dart';
 
@@ -127,8 +129,8 @@ class MenuUserPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch, //en el eje x
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-            height: 220,
+            padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0),
+            height: 200,
             child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
           ),
           SizedBox(height: 20.0),

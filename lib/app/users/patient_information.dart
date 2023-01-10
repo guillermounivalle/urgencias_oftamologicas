@@ -1,43 +1,43 @@
 
 import 'dart:core';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/app/models/patients.dart';
+import '../../common_widgets/dropdowmlist_custom.dart';
 import '../../common_widgets/form_submit_button.dart';
 import '../../services/database.dart';
 import  'package:intl/intl.dart';
-import '../app_navigate/button_options_insert_data.dart';
+import 'package:urgencias_oftamologicas/app/validators/validators.dart';
+import '../../styles/color.styles.dart';
 
 
-
-class PatientInformation extends StatefulWidget {
-  const PatientInformation({super.key});
-
+class PatientInformation extends StatefulWidget with EmptyFieldValidators{
   @override
   State<PatientInformation> createState() => _PatientInformationState();
-
 }
 
 class _PatientInformationState extends State<PatientInformation> {
-  final List<String> genero = <String>['Seleccionar','Masculino','Femenino','Otro' ];
-  final List<String> escolaridad = <String>['Seleccionar','Primaria','Secundaria','Pre-Grado','Post-Grado' ];
-  final List<String> procedencia = <String>[ 'Seleccionar', 'Urbana', 'Rural'];
+
+  final TextEditingController _documentIdController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final FocusNode _documentIdFocusNode = FocusNode(); // crear atributo en _builEmailTextField
+  final FocusNode _nameFocusNode = FocusNode(); // crear atributo en _builEmailTextField
+  final FocusNode _lastnameFocusNode = FocusNode(); // crear atributo en _builEmailTextField
+  String get _name => _nameController.text;
+  String get _lastName => _lastNameController.text;
+  String get _documentID => _documentIdController.text;
+  bool _submitted = false;  // Inicia en false para que el texto en rojo de mensaje de error no aparezca al inicio
+  bool _isLoading = false;  // pasa a true mientras carga
+  final List<String> genero = <String>['Masculino','Femenino','Otro' ];
+  final List<String> escolaridad = <String>['Primaria','Secundaria','Pre-Grado','Post-Grado' ];
+  final List<String> procedencia = <String>[ 'Urbana', 'Rural'];
   final List<String> estrato = <String>['Seleccionar','1','2','3','4','5','6','+6' ];
   DateTime date = DateTime.now();
   String formatdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
-
-  /**
-   * final String name;
-      final String lastname;
-      final String documentId;
-      final String gender;
-      final String socioeconomic;
-      final String schooling;
-      final String source;
-      final DateTime birthdate;
-      final Object age;*/
 
   Future<void> _inserData_User(BuildContext context) async {
     String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
@@ -64,6 +64,30 @@ class _PatientInformationState extends State<PatientInformation> {
         lastDate: DateTime(2100));
   }
 
+  void _documentIdlEditingComplete(){
+    //hasta que no esté correctamente en el campo documento identidad,
+    // no pasa al campo nombre
+    final newFocus = widget.documentIdValidator.isValid(_documentID)
+        ? _nameFocusNode : _documentIdFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
+  }
+
+  void _nameEditingComplete(){
+    //hasta que no esté correctamente en el campo Nombre,
+    // no pasa al campo Apellido
+    final newFocus = widget.nameValidator.isValid(_name)
+        ? _lastnameFocusNode : _nameFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
+  }
+
+  void _lastNameEditingComplete(){
+    //hasta que no esté correctamente en el campo Apellido,
+    // no pasa al campo Email
+    final newFocus = widget.lastnameValidator.isValid(_lastName)
+        ? _nameFocusNode : _lastnameFocusNode;
+    FocusScope.of(context).requestFocus(newFocus);
+  }
+
   void _showDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -84,371 +108,304 @@ class _PatientInformationState extends State<PatientInformation> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Información del Paciente'),
+  TextField _buildDocumentIdTextField() {
+    bool showErrorText = _submitted && !widget.documentIdValidator.isValid(_documentID);
+    return TextField(
+      style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
       ),
-      body: SingleChildScrollView( //Evita el desborde de pantalla
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: _buildContent(context),
+      controller: _documentIdController,
+      focusNode: _documentIdFocusNode,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
         ),
+        enabled: _isLoading == false,
+        labelText: 'Documento de identidad',
+        labelStyle: TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w100,
+            color: Colors.white//FocusNode. ? Colors.blue : Colors.black
+        ),
+        errorText: showErrorText ? widget.invalidDocumentIdErrorText : null,
       ),
-      /**
-       * floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => _inserData_User(context),
-          ) ,*/
+      autocorrect: false,  // no trabaja el autocorrector
+      keyboardType: TextInputType.number, //teclado para n{umero
+      textInputAction: TextInputAction.next, //Teclado salta a la siguiente linea
+      onChanged: (documentid) => _updateState(),
+      onEditingComplete: _documentIdlEditingComplete,
     );
   }
 
+  TextField _buildNameTextField() {
+    bool showErrorText = _submitted && !widget.emailValidator.isValid(_name);
+    return TextField(
+      style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
+      ),
+      controller: _nameController,
+      focusNode: _nameFocusNode,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
+        enabled: _isLoading == false,
+        labelText: 'Nombre',
+        labelStyle: TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w100,
+            color: Colors.white
+        ),
+        errorText: showErrorText ? widget.invalidEmailErrorText : null,
+      ),
+      autocorrect: false,  // no trabaja el autocorrector
+      keyboardType: TextInputType.name, //teclado para nombres
+      textInputAction: TextInputAction.next, //Teclado salta a la siguiente linea
+      onChanged: (name) => _updateState(),
+      onEditingComplete: _nameEditingComplete,// cuando esté completo el campo, pasa a campos del password
+    );
+  }
+
+  TextField _buildLastNameTextField() {
+    bool showErrorText = _submitted && !widget.emailValidator.isValid(_lastName);
+    return TextField(
+      style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
+      ),
+      controller: _lastNameController,
+      focusNode: _lastnameFocusNode,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
+        enabled: _isLoading == false,
+        labelText: 'Apellido',
+        labelStyle: TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w100,
+            color: Colors.white
+        ),
+        errorText: showErrorText ? widget.invalidLastNameErrorText : null,
+      ),
+      autocorrect: false,  // no trabaja el autocorrector
+      keyboardType: TextInputType.name, //teclado para email
+      textInputAction: TextInputAction.next, //Teclado salta a la siguiente linea
+      onChanged: (lastname) => _updateState(),
+      //onEditingComplete: _lastNameEditingComplete,// cuando esté completo el campo, pasa a campos del password
+    );
+  }
+
+  TextField _buildBirthDateTextField() {
+    return TextField(
+      style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
+      ),
+      decoration: InputDecoration(
+        suffixIcon: InkWell(
+          onTap: () => _ShowCalendar(context),
+          child: Container(
+              width: 3.0,
+              height: 3.0,
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 30.0, 0.0),
+              child: SvgPicture.asset(
+                'images/calendar-week-fill.svg',
+                width: 3.0,
+                height: 3.0,
+                color: Colors.white,
+              )
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
+        enabled: true,
+        labelText: 'Fecha de Nacimiento',
+        labelStyle: TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w100,
+            color: Colors.white
+        ),
+      ),
+      onChanged: (birtdate) => _updateState(),
+      //onEditingComplete: _lastNameEditingComplete,// cuando esté completo el campo, pasa a campos del password
+    );
+  }
+
+  TextField _buildConsulDateTextField() {
+    return TextField(
+      style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w100,
+          color: Colors.white
+      ),
+      decoration: InputDecoration(
+        suffixIcon: InkWell(
+          onTap: () => _ShowCalendar(context),
+          child: Container(
+              width: 3.0,
+              height: 3.0,
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 30.0, 0.0),
+              child: SvgPicture.asset(
+                'images/calendar-week-fill.svg',
+                width: 3.0,
+                height: 3.0,
+                color: Colors.white,
+              )
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
+        enabled: _isLoading == false,
+        labelText: 'Fecha de Consulta',
+        labelStyle: TextStyle(
+            fontSize: 15.0,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w100,
+            color: Colors.white
+        ),
+      ),
+      onChanged: (birtdate) => _updateState(),
+      //onEditingComplete: _lastNameEditingComplete,// cuando esté completo el campo, pasa a campos del password
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar:PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: AppBar(//Leer documentación
+          centerTitle: true,
+          title: Text(
+            'DATOS DEL PACIENTE',
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w100,
+                fontSize: 16.0,
+                color: Colors.white
+            ),
+          ),
+          backgroundColor: ColorStyles.appbarprimarycolor,//Title bar
+        ),
+      ),
+      body: SingleChildScrollView( //Evita el desborde de pantalla
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: _buildContent(context),
+        ),
+      ),
+    );
+  }
+
+  void _holamundo(String value){
+    print("value es ======> "+ value);
+  }
   Container _buildContent(BuildContext context) {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, //en el eje y
         crossAxisAlignment: CrossAxisAlignment.stretch, //en el eje x
         children: <Widget>[
-          SizedBox(height: 40.0),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0), //add border radius
+            child: Image.asset(
+              "images/datos-paciente.jpg",
+              height: 180.0,
+              //width: 100.0,
+              fit:BoxFit.cover,
+            ),
+          ),
+          SizedBox(height: 15.0),
           Text(
-            'Por favor ingrese los datos del paciente a valorar',
+            'Por favor ingrese los datos del paciente',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w600
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w300,
+                //fontStyle: FontStyle.italic,
+                fontSize: 20.0,
+                color: Colors.white
+            ),
+          ),
+          SizedBox(height: 20.0),
+          _buildDocumentIdTextField(),
+          SizedBox(height: 20.0),
+          _buildNameTextField(),
+          SizedBox(height: 20.0),
+          _buildLastNameTextField(),
+          SizedBox(height: 20.0),
+          _buildBirthDateTextField(),
+          SizedBox(height: 20.0),
+          Container(
+            child: DropdownListCustom(
+                listElements: genero,
+                onChanged: _holamundo,
+                labelInfo: "Genero",
+                showSecondText: false
             ),
           ),
           SizedBox(height: 20.0),
           Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Documento de Identidad',
-                        ),
-                        initialValue: '29114523',
-                        keyboardType: TextInputType.number
-                    ),
-                  ),
-                  ButtonOptionsInsertData(
-                    assetName: 'images/find.jpg',
-                    text: '',
-                    colorText: Colors.black87,
-                    color: Colors.white,
-                    borderRadius: 6.0,
-                    onPressed: () {},
-                  ),
-                ]
+            child: DropdownListCustom(
+                listElements: escolaridad,
+                onChanged: _holamundo,
+                labelInfo: "Escolaridad",
+                showSecondText: false
             ),
           ),
           SizedBox(height: 20.0),
           Container(
-            color: Colors.white10,
-            child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Nombres del Paciente',
-                ),
-                initialValue: 'Jhon'
+            child: DropdownListCustom(
+                listElements: procedencia,
+                onChanged: _holamundo,
+                labelInfo: "Procedencia",
+                showSecondText: false
             ),
           ),
           SizedBox(height: 20.0),
           Container(
-            color: Colors.white10,
-            child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Apellidos del Paciente',
-                ),
-                initialValue: 'Doe'
+            child: DropdownListCustom(
+                listElements: estrato,
+                onChanged: _holamundo,
+                labelInfo: "Estrato Socio-Económico",
+                showSecondText: false
             ),
           ),
           SizedBox(height: 20.0),
-          Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Fecha Nacimiento',
-                        ),
-                        initialValue: '1983/12/24'
-                    ),
-                  ),
-                  ButtonOptionsInsertData(
-                    assetName: 'images/calendar.png',
-                    text: '',
-                    colorText: Colors.black87,
-                    color: Colors.white,
-                    borderRadius: 6.0,
-                    onPressed: () => _ShowCalendar(context),
-                  ),
-                ]
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Genero',
-                        ),
-                        initialValue: 'Masculino'
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      width: 250.0,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: Colors.blue,
-                              width: 2)
-                      ),
-                      child: DropdownButton<String>(
-                        value: genero.first,
-                        borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white,
-                        //dropdown background color
-                        underline: SizedBox(),
-                        //remove underline
-                        isExpanded: true,
-                        //make true to make width 100%
-                        icon: const Icon(Icons.arrow_drop_down),
-                        iconEnabledColor: Colors.blueAccent,
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.blueAccent),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          print("dndndndndn");
-                          //setState(() {
-                          //dropdownValue = value!;
-                          //});
-                        },
-                        items: genero.map<DropdownMenuItem<String>>((
-                            String value) {
-                          return DropdownMenuItem<String>(
-                            alignment: Alignment.centerLeft,
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      )
-                  )
-                ]
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Escolaridad',
-                        ),
-                        initialValue: 'Secundaria'
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      width: 250.0,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.blue,
-                              width: 2)
-                      ),
-                      child: DropdownButton<String>(
-                        value: escolaridad.first,
-                        borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white,
-                        //dropdown background color
-                        underline: SizedBox(),
-                        //remove underline
-                        isExpanded: true,
-                        //make true to make width 100%
-                        icon: const Icon(Icons.arrow_drop_down),
-                        iconEnabledColor: Colors.blueAccent,
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.blueAccent),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          print("dndndndndn");
-                          //setState(() {
-                          //dropdownValue = value!;
-                          //});
-                        },
-                        items: escolaridad.map<DropdownMenuItem<String>>((
-                            String value) {
-                          return DropdownMenuItem<String>(
-                            alignment: Alignment.centerLeft,
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      )
-                  )
-                ]
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Procedencia',
-                        ),
-                        initialValue: 'Urbana'
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      width: 250.0,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.blue,
-                              width: 2)
-                      ),
-                      child: DropdownButton<String>(
-                        value: procedencia.first,
-                        borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white,
-                        //dropdown background color
-                        underline: SizedBox(),
-                        //remove underline
-                        isExpanded: true,
-                        //make true to make width 100%
-                        icon: const Icon(Icons.arrow_drop_down),
-                        iconEnabledColor: Colors.blueAccent,
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.blueAccent),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          print("dndndndndn");
-                          //setState(() {
-                          //dropdownValue = value!;
-                          //});
-                        },
-                        items: procedencia.map<DropdownMenuItem<String>>((
-                            String value) {
-                          return DropdownMenuItem<String>(
-                            alignment: Alignment.centerLeft,
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      )
-                  )
-                ]
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Estrato',
-                        ),
-                        enabled: false,
-                        initialValue: '2'
-                    ),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
-                      width: 250.0,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.blue,
-                              width: 2)
-                      ),
-                      child: DropdownButton<String>(
-                        value: estrato.first,
-                        borderRadius: BorderRadius.circular(5),
-                        dropdownColor: Colors.white,
-                        //dropdown background color
-                        underline: SizedBox(),
-                        //remove underline
-                        isExpanded: true,
-                        //make true to make width 100%
-                        icon: const Icon(Icons.arrow_drop_down),
-                        iconEnabledColor: Colors.blueAccent,
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.blueAccent),
-                        onChanged: (String? value) {
-                          // This is called when the user selects an item.
-                          print("dndndndndn");
-                          //setState(() {
-                          //dropdownValue = value!;
-                          //});
-                        },
-                        items: estrato.map<DropdownMenuItem<String>>((
-                            String value) {
-                          return DropdownMenuItem<String>(
-                            alignment: Alignment.centerLeft,
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      )
-                  )
-                ]
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            color: Colors.white10,
-            child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Fecha De Consulta',
-                      ),
-                      enabled: false,
-                      initialValue: '1999-02-01',
-                    ),
-                  ),
-                  ButtonOptionsInsertData(
-                    assetName: 'images/calendar.png',
-                    text: '',
-                    colorText: Colors.black87,
-                    color: Colors.white,
-                    borderRadius: 6.0,
-                    onPressed: () => _ShowCalendar(context),
-                  ),
-                ]
-            ),
-          ),
+          _buildConsulDateTextField(),
           SizedBox(height: 20.0),
           FormSumbitButton(
               color: Colors.blue,
@@ -462,7 +419,14 @@ class _PatientInformationState extends State<PatientInformation> {
       ),
     );
   }
+  void _updateState() {
+    setState(() {
+
+    });
+  }
 }
+
+
 
 
 

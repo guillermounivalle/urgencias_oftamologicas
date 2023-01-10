@@ -85,8 +85,6 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - images/declaracion.png
-    - images/hospital.jpg
     - images/registerimage.jpg
     - images/find.jpg
     - images/calendar.png
@@ -96,11 +94,19 @@ flutter:
     - images/botonmodulousuario.png
     - images/logo-HU_Horizontal_blanco.png
     - images/person-fill.svg
+    - images/heart-pulse-fill.svg
     - images/house-check-fill.svg
     - images/check-circle-fill.svg
     - images/clipboard-data-fill.svg
     - images/file-medical-fill.svg
     - images/x-circle-fill.svg
+    - images/cirugia.jpg
+    - images/cuidado-casa.jpg
+    - images/datos-paciente.jpg
+    - images/evaluacion-inicial.jpg
+    - images/Expanding-Towards-3D-Metrology.jpeg
+    - images/hospitalizacion.jpg
+    - images/calendar-week-fill.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

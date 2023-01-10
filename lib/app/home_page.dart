@@ -30,7 +30,8 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch, //en el eje x
         children: <Widget>[
           Container(
-            height: 220,
+            padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0),
+            height: 200,
             child: Image.asset("images/logo-HU_Horizontal_blanco.png"),
           ),
           SizedBox(height: 10.0),

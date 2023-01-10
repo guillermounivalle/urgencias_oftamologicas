@@ -6,12 +6,9 @@ import 'package:urgencias_oftamologicas/app/validators/validators.dart';
 import 'package:urgencias_oftamologicas/styles/color.styles.dart';
 import '../../../common_widgets/form_submit_button.dart';
 import '../../../common_widgets/show_alert_dialog.dart';
-import '../../../infrastructure/auth/session.model.dart';
 import '../../../services/database.dart';
 import '../../models/medical_staff.dart';
 import '../register.view.model.dart';
-import '../signout.dart';
-import  'package:intl/intl.dart';
 
 class RegisterAccountForm extends StatefulWidget with EmptyFieldValidators{ //mixin
 
@@ -21,15 +18,16 @@ class RegisterAccountForm extends StatefulWidget with EmptyFieldValidators{ //mi
 
 class _RegisterAccountFormState extends State<RegisterAccountForm> {
 
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _documentIdController = TextEditingController();
-  final TextEditingController _passwordControler = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final FocusNode _emailFocusNode = FocusNode(); // crear atributo en _builEmailTextField
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordControler = TextEditingController();
+
   final FocusNode _documentIdFocusNode = FocusNode(); // crear atributo en _builEmailTextField
   final FocusNode _nameFocusNode = FocusNode(); // crear atributo en _builEmailTextField
   final FocusNode _lastnameFocusNode = FocusNode(); // crear atributo en _builEmailTextField
+  final FocusNode _emailFocusNode = FocusNode(); // crear atributo en _builEmailTextField
   final FocusNode _passwordFocusNode = FocusNode(); //crear atributo en _builPasswordTextField
   bool _submitted = false;  // Inicia en false para que el texto en rojo de mensaje de error no aparezca al inicio
   bool _isLoading = false;  // pasa a true mientras carga
@@ -39,11 +37,9 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
   String get _password => _passwordControler.text;
   String get _name => _nameController.text;
   String get _lastName => _lastNameController.text;
-  String get _documentID => _nameController.text;
+  String get _documentID => _documentIdController.text;
 
   Future<void> _inserData_User(BuildContext context) async{
-   // String uuid = OFTSession.currentSession!.uid;
-    //String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
     try{
       final database = Provider.of<FirestoresDatabase>(context,listen: false);
       await database.addUser(
@@ -64,15 +60,27 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
   }
 
   /**
-   * Método usado para navegar al menu de usuario
+   * Método usado para mensaje de creación de cuenta fue exitoso
    * */
   void _showMessageRegisterSuccessful(){
     showAlertDialog(
       context,
-      action: 'successful',
       title: 'Registro Exitoso',
       content: 'La cuenta se ha registrado con éxito\n'
           'Muy pronto un administrador activará la cuenta',
+      defaultActionText: 'TERMINAR',
+    );
+  }
+
+  /**
+   * Método usado para mensaje de creación de cuenta no fue posible
+   * */
+  void _showMessageRegisterError(){
+    showAlertDialog(
+      context,
+      title: 'Erro de Registro',
+      content: 'La cuenta no se pudo registrar\n'
+          'Seleccione TERMINAR e intente registrar su cuenta de nuevo',
       defaultActionText: 'TERMINAR',
     );
   }
@@ -181,7 +189,7 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
   }
 
   TextField _buildNameTextField() {
-    bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
+    bool showErrorText = _submitted && !widget.emailValidator.isValid(_name);
     return TextField(
       style: TextStyle(
           fontSize: 20.0,
@@ -253,7 +261,7 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
   }
 
   TextField _buildEmailTextField() {
-    bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
+    bool showErrorText = _submitted && !widget.emailValidator.isValid(_lastName);
     return TextField(
       style: TextStyle(
           fontSize: 20.0,
