@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../blocs/services/database.dart';
+import '../../../repository/services/database.dart';
 import '../../../blocs/validators/validators.dart';
 import '../../../data/models/medical_staff.dart';
 import '../../../repository/common_widgets/form_submit_button.dart';

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../blocs/services/auth.dart';
+import '../../repository/services/auth.dart';
 import '../../repository/common_widgets/show_alert_dialog.dart';
 
 

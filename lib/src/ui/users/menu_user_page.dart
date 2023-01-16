@@ -8,7 +8,7 @@ import 'package:urgencias_oftamologicas/src/ui/users/patient_information.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_surgery.dart';
 
 import '../../blocs/app_navigate/select_module_button.dart';
-import '../../blocs/services/database.dart';
+import '../../repository/services/database.dart';
 import '../../repository/styles/color.styles.dart';
 import '../app.signin/login.view.model.dart';
 import '../app.signin/signout.dart';

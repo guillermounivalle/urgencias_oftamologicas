@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../../blocs/infrastructure/auth/session.model.dart';
 import '../../data/models/medical_staff.dart';
 import '../../data/models/patients.dart';
-import '../infrastructure/auth/session.model.dart';
 import 'api_path.dart';
 
 abstract class Database  {
