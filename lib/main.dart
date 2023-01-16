@@ -2,15 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:urgencias_oftamologicas/app/infrastructure/oft.module.dart';
-import 'package:urgencias_oftamologicas/app/infrastructure/router.dart';
-import 'package:urgencias_oftamologicas/app/main.module.dart';
-import 'package:urgencias_oftamologicas/app/users/user.modules.dart';
+import 'package:urgencias_oftamologicas/src/blocs/infrastructure/locator/service.locator.dart';
+import 'package:urgencias_oftamologicas/src/blocs/infrastructure_route/oft.module.dart';
+import 'package:urgencias_oftamologicas/src/blocs/infrastructure_route/router.dart';
+import 'package:urgencias_oftamologicas/src/blocs/services/auth.dart';
+import 'package:urgencias_oftamologicas/src/blocs/services/database.dart';
+import 'package:urgencias_oftamologicas/src/blocs/main.module.dart';
+import 'package:urgencias_oftamologicas/src/repository/styles/color.styles.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/user.modules.dart';
 import 'package:urgencias_oftamologicas/firebase_options.dart';
-import 'package:urgencias_oftamologicas/infrastructure/locator/service.locator.dart';
-import 'package:urgencias_oftamologicas/services/auth.dart';
-import 'package:urgencias_oftamologicas/services/database.dart';
-import 'package:urgencias_oftamologicas/styles/color.styles.dart';
 
 
 //define entry point
@@ -71,9 +71,9 @@ class _MyAppState extends State<MyApp> {
             const Locale('fr'),
             const Locale('es')
           ],
-          title: 'OFT-UV',//title app
+          title: 'OFT-UV',//title src
           theme: ThemeData(//Leer documentaci{on themeData
-            scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire app
+            scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire src
           ),
           initialRoute: 'homepage',
         ),
