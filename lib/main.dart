@@ -18,6 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //Run Firebase initialize
   await Firebase.initializeApp(
+    name: "OFT-UV",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   //the main method runApp. Into run App will go the root widget MyApp()
