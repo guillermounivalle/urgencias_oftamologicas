@@ -52,12 +52,12 @@ class HomePage extends StatelessWidget {
               SelectModuleImageButton(
                 assetName: 'images/botonmodulousuario.png',
                 onPressed: () => _navigateToLogin(context),
-                text: 'Usuario',
+                text: 'Personal Medico',
               ),
               SizedBox(height: 30.0),
               SelectModuleImageButton(
                 assetName: 'images/botonmoduloadmin.png',
-                text: 'Administrador',
+                text: 'Director',
                 onPressed:  () => _navigateToLogin(context),
               ),
             ],
