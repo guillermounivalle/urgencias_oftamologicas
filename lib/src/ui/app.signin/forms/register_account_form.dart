@@ -78,7 +78,7 @@ class _RegisterAccountFormState extends State<RegisterAccountForm> {
   void _showMessageRegisterError(){
     showAlertDialog(
       context,
-      title: 'Erro de Registro',
+      title: 'Error de Registro',
       content: 'La cuenta no se pudo registrar\n'
           'Seleccione TERMINAR e intente registrar su cuenta de nuevo',
       defaultActionText: 'TERMINAR',

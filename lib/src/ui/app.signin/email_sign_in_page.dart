@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:urgencias_oftamologicas/src/blocs/common/view.model.consumer.dart';
 import '../../repository/styles/color.styles.dart';
 import 'forms/email_sign_in_form.dart';
 import 'package:provider/provider.dart';

@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
 
   void _navigateToLogin(BuildContext context) {
     Navigator.pushNamed(context, 'login');
+
   }
 
   @override
