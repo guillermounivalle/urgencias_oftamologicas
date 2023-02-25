@@ -40,7 +40,8 @@ class _PatientInformationState extends State<PatientInformation> {
   String formatdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
 
   Future<void> _inserData_User(BuildContext context) async {
-    String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+    String birthdate = DateFormat("yyyy-MM-dd").format(DateTime.now());//fecha de nacimiento(no va DateTime.now())
+    String colsutationdate = DateFormat("yyyy-MM-dd").format(DateTime.now());//Fecha actual
     final database = Provider.of<FirestoresDatabase>(context, listen: false);
     await database.addPatient(
         Patients(
@@ -51,8 +52,8 @@ class _PatientInformationState extends State<PatientInformation> {
             socioeconomic: '3',
             schooling: 'Primaria',
             source: 'Rural',
-            age: 25,
-            birthdate: cdate));
+            colsutationdate: colsutationdate,
+            birthdate: birthdate));
   }
 
   Future<void> _ShowCalendar(BuildContext context) async {

@@ -10,7 +10,7 @@ class Patients{
     required this.schooling,
     required this.source,
     required this.birthdate,
-    required this.age,
+    required this.colsutationdate,
   });
   final String name;
   final String lastname;
@@ -20,7 +20,7 @@ class Patients{
   final String schooling;
   final String source;
   final String birthdate;
-  final int age;
+  final String colsutationdate ;
 
   Map<String, dynamic> toMap(){
     return{
@@ -32,7 +32,7 @@ class Patients{
       'schooling': schooling,
       'schooling': schooling,
       'birthdate': birthdate,
-      'age': age
+      'consultationdate': colsutationdate
     };
   }
 }
