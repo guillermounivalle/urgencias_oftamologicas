@@ -74,7 +74,8 @@ class _MyAppState extends State<MyApp> {
           ],
           title: 'OFT-UV',//title src
           theme: ThemeData(//Leer documentaci{on themeData
-            scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire src
+              scaffoldBackgroundColor: ColorStyles.backgroundprimarycolor, //primary color of our entire src
+              fontFamily: 'Poppins'
           ),
           initialRoute: 'homepage',
         ),

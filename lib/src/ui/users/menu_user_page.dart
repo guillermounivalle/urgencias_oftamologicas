@@ -122,7 +122,7 @@ class MenuUserPage extends StatelessWidget {
             colorText: Colors.white,
             color: ColorStyles.appbarprimarycolor,//Title bar
             borderRadius: 5.0,
-            onPressed: () =>  _navigateToModuleSelected(context, 'patient_information')
+            onPressed: () =>  Navigator.pushNamed(context, 'patient_information')
           ),
           SizedBox(height: 20.0),
           SelectModuleButton(
