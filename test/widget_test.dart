@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/src/ui/app.signin/email_sign_in_page.dart';
 import 'package:urgencias_oftamologicas/src/ui/home_page.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_information.dart';
 
 //Inicia ejecución
 void main() {

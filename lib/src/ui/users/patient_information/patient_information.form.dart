@@ -4,6 +4,8 @@ import 'package:urgencias_oftamologicas/src/domain/patient/model/patient.enum.da
 import 'package:urgencias_oftamologicas/src/repository/utils/dateutils.util.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_information/patient_information.view.model.dart';
 
+import '../../../repository/styles/color.styles.dart';
+
 class PatientForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   const PatientForm({required this.formKey, Key? key}) : super(key: key);
@@ -23,7 +25,8 @@ class _PatientFormState extends State<PatientForm> {
                   label: 'Documento de Identidad:',
                   value: model.entity.documentId,
                   onSaved: (value) => model.entity.documentId = value,
-                  validator: (value) => value != null && value != ''
+                  validator: (value) => value != null && value != '',
+                  keyboard: TextInputType.number
               ),
               _textInput(
                   label: 'Nombre:',
@@ -39,7 +42,7 @@ class _PatientFormState extends State<PatientForm> {
               _calendarInput(
                   label: 'Fecha de Nacimiento:',
                   value: model.entity.birthdate,
-                  onSaved: (value) => model.entity.birthdate = value
+                  onSaved: (value) => model.entity.birthdate = value,
               ),
               _enumInput<Gender>(
                   label: 'Genero:',
@@ -64,6 +67,11 @@ class _PatientFormState extends State<PatientForm> {
                   value: model.entity.socioeconomic,
                   items: EconomicStratum.values,
                   onSaved: (value) => model.entity.socioeconomic = value
+              ),
+              _calendarInput(
+                label: 'Fecha de Consulta:',
+                value: model.entity.consultationDate,
+                onSaved: (value) => model.entity.consultationDate = value,
               ),
             ],
           );
@@ -118,10 +126,11 @@ class _PatientFormState extends State<PatientForm> {
             suffixIcon: Icon(Icons.calendar_today, color: Colors.white,)
         ),
         validator: (value) => validator != null && !validator.call(value) ? 'Valor Obligatorio.' : null,
+        key: UniqueKey(),
         onTap: () => showDatePicker(
             context: context,
             initialDate: value != null ? value : DateTime.now(),
-            firstDate: DateTime(2022),
+            firstDate: DateTime(1900),
             lastDate: DateTime.now()
         ).then((value) => setState((){
           onSaved.call(value);
@@ -148,11 +157,13 @@ class _PatientFormState extends State<PatientForm> {
                 Text(label, style: TextStyle(color: Colors.white, fontSize: 18),),
                 DropdownButton<T>(
                   value: value,
+                  dropdownColor: ColorStyles.appbarprimarycolor,
                   hint: Text('Seleccione uno:', style: TextStyle(color: Colors.white),),
                   items: items.map((e) =>
                       DropdownMenuItem(
                           value: e,
-                          child: Text(e.getValue())
+                          child: Text(e.getValue(),
+                          style: TextStyle(color: Colors.white),)
                       )
                   ).toList(),
                   onChanged: (value) => setState(() => onSaved.call(value)),

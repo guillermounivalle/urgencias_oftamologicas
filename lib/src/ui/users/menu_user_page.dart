@@ -4,9 +4,7 @@ import 'package:provider/provider.dart';
 import  'package:intl/intl.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_hospitalization.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_information.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_surgery.dart';
-
 import '../../blocs/app_navigate/select_module_button.dart';
 import '../../repository/services/database.dart';
 import '../../repository/styles/color.styles.dart';
@@ -21,15 +19,6 @@ class MenuUserPage extends StatelessWidget {
   Future<void> _navigateToModuleSelected(BuildContext context, String module)async{
     //TODO: navigate to module selected
     switch(module) {
-      case "patient_information": {
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => PatientInformation(),
-          ),
-        );
-      }
-      break;
       case "initial_evaluation": {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
