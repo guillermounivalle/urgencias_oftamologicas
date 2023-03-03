@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/src/blocs/common/view.model.consumer.dart';
-import 'package:urgencias_oftamologicas/src/domain/patient/model/patient.enum.dart';
 import 'package:urgencias_oftamologicas/src/repository/utils/dateutils.util.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_information/patient_information.view.model.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patientinitialevaluation.view.model.dart';
+import 'package:urgencias_oftamologicas/src/domain/patient_initial_evaluation/model/patientinitialevaluation.enum.dart';
+
+import '../../../repository/styles/color.styles.dart';
 
 class PatientInitialEvaluationForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -15,7 +17,7 @@ class PatientInitialEvaluationForm extends StatefulWidget {
 class _PatientInitialEvaluationFormState extends State<PatientInitialEvaluationForm> {
   @override
   Widget build(BuildContext context) {
-    return ViewModelConsumer<PatientViewModel>(
+    return ViewModelConsumer<PatientInitialEvaluationViewModel>(
         builder: (context, model, _) {
           return Column(
             children: [
@@ -23,14 +25,56 @@ class _PatientInitialEvaluationFormState extends State<PatientInitialEvaluationF
                   label: 'Documento de Identidad:',
                   value: model.entity.documentId,
                   onSaved: (value) => model.entity.documentId = value,
-                  validator: (value) => value != null && value != ''
+                  validator: (value) => value != null && value != '',
+                  keyboard: TextInputType.number
               ),
               _calendarInput(
                 label: 'Fecha de Consulta:',
                 value: model.entity.consultationDate,
                 onSaved: (value) => model.entity.consultationDate = value,
               ),
-
+              _enumInput<Patology>(
+                  label: 'Tipo de Patología:',
+                  value: model.entity.patologyType,
+                  items: Patology.values,
+                  onSaved: (value) => model.entity.patologyType = value
+              ),
+              _enumInput<InjuredEye>(
+                  label: 'Trauma Contuso',
+                  value: model.entity.bluntTrauma,
+                  items: InjuredEye.values,
+                  onSaved: (value) => model.entity.bluntTrauma = value
+              ),
+              _enumInput<InjuredEye>(
+                  label: 'Trauma Penetrante',
+                  value: model.entity.penetratingTrauma,
+                  items: InjuredEye.values,
+                  onSaved: (value) => model.entity.penetratingTrauma = value
+              ),
+              _enumInput<InjuredEye>(
+                  label: 'Dis Agudeza visual',
+                  value: model.entity.decreasedVisualAcuity,
+                  items: InjuredEye.values,
+                  onSaved: (value) => model.entity.decreasedVisualAcuity = value
+              ),
+              _enumInput<InjuredEye>(
+                  label: 'Dolor Ocular',
+                  value: model.entity.eyePain,
+                  items: InjuredEye.values,
+                  onSaved: (value) => model.entity.eyePain = value
+              ),
+              _enumInput<InjuredEye>(
+                  label: 'Ojo Rojo',
+                  value: model.entity.redEye,
+                  items: InjuredEye.values,
+                  onSaved: (value) => model.entity.redEye = value
+              ),
+              _enumInput<InjuredEye>(
+                  label: 'Conjuntivitis',
+                  value: model.entity.conjunctivitis,
+                  items: InjuredEye.values,
+                  onSaved: (value) => model.entity.conjunctivitis = value
+              ),
             ],
           );
         }
@@ -114,11 +158,13 @@ class _PatientInitialEvaluationFormState extends State<PatientInitialEvaluationF
                 Text(label, style: TextStyle(color: Colors.white, fontSize: 18),),
                 DropdownButton<T>(
                   value: value,
+                  dropdownColor: ColorStyles.appbarprimarycolor,
                   hint: Text('Seleccione uno:', style: TextStyle(color: Colors.white),),
                   items: items.map((e) =>
                       DropdownMenuItem(
                           value: e,
-                          child: Text(e.getValue())
+                          child: Text(e.getValue(),
+                          style: TextStyle(color: Colors.white),)
                       )
                   ).toList(),
                   onChanged: (value) => setState(() => onSaved.call(value)),

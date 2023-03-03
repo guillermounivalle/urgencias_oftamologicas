@@ -1,33 +1,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import  'package:intl/intl.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_hospitalization.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_surgery.dart';
 import '../../blocs/app_navigate/select_module_button.dart';
-import '../../repository/services/database.dart';
 import '../../repository/styles/color.styles.dart';
 import '../app.signin/login.view.model.dart';
 import '../app.signin/signout.dart';
-import 'initial_evaluation.dart';
+
 
 class MenuUserPage extends StatelessWidget {
   const MenuUserPage({super.key}) ;
 
-
   Future<void> _navigateToModuleSelected(BuildContext context, String module)async{
     //TODO: navigate to module selected
     switch(module) {
-      case "initial_evaluation": {
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => InitialEvaluationPatient(),
-          ),
-        );
-      }
-      break;
       case "Hospitalization": {
         Navigator.of(context).push(
           MaterialPageRoute<void>(

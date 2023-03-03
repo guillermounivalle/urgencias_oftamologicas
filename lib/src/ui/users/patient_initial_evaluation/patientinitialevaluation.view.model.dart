@@ -5,7 +5,7 @@ import 'package:urgencias_oftamologicas/src/domain/patient/app/patient.service.d
 import 'package:urgencias_oftamologicas/src/domain/patient/model/patient.model.dart';
 
 import '../../../domain/patient_initial_evaluation/app/patientinitialevaluation.service.dart';
-import '../../../domain/patient_initial_evaluation/model/patient_initial_evaluation.model.dart';
+import '../../../domain/patient_initial_evaluation/model/patientinitialevaluation.model.dart';
 
 class PatientInitialEvaluationViewModel extends BaseViewModel {
   final PatientInitialEvaluationService _service = serviceLocator<PatientInitialEvaluationService>();

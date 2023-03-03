@@ -2,7 +2,7 @@
 import 'package:urgencias_oftamologicas/src/ui/users/patient_home.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_hospitalization.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_information/patient_information.main.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patient_initial_evaluation.main.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patientinitialevaluation.main.dart';
 import '../../blocs/infrastructure_route/oft.module.dart';
 import '../../blocs/infrastructure_route/router.model.dart';
 import 'initial_evaluation.dart';

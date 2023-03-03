@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/src/blocs/common/view.model.consumer.dart';
-import 'package:urgencias_oftamologicas/src/domain/patient/model/patient.enum.dart';
 import 'package:urgencias_oftamologicas/src/repository/utils/dateutils.util.dart';
+
+import 'package:urgencias_oftamologicas/src/domain/patient/model/patient.enum.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_information/patient_information.view.model.dart';
 
 import '../../../repository/styles/color.styles.dart';

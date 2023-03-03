@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/src/repository/styles/color.styles.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patien_initial_evaluation.form.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patient_initial_evaluation.view.model.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patieninitialevaluation.form.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patientinitialevaluation.view.model.dart';
 
 class PatientInitialEvaluationFormView extends StatefulWidget {
   const PatientInitialEvaluationFormView({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image.asset(
-                "images/datos-paciente.jpg",
+                "images/evaluacion-inicial.jpg",
                 height: 180.0,
                 //width: 100.0,
                 fit:BoxFit.cover,
@@ -78,7 +78,7 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
           ),
           SizedBox(height: 15.0),
           Text(
-            'Por favor ingrese los datos del paciente',
+            'Ingrese los datos de la valoración inicial del paciente',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.w300,
