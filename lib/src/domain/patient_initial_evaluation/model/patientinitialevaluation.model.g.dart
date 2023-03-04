@@ -76,6 +76,9 @@ PatientInitialEvaluation _$PatientInitialEvaluationFromJson(
           $enumDecodeNullable(_$InjuredEyeEnumMap, json['tearductyInjury']),
       redEye: $enumDecodeNullable(_$InjuredEyeEnumMap, json['redEye']),
       tumors: $enumDecodeNullable(_$InjuredEyeEnumMap, json['tumors']),
+      tearing: $enumDecodeNullable(_$InjuredEyeEnumMap, json['tearing']),
+      visualAcuity:
+          $enumDecodeNullable(_$VisualAcuityEnumMap, json['visualAcuity']),
     );
 
 Map<String, dynamic> _$PatientInitialEvaluationToJson(
@@ -125,6 +128,8 @@ Map<String, dynamic> _$PatientInitialEvaluationToJson(
       'tearductyInjury': _$InjuredEyeEnumMap[instance.tearductyInjury],
       'redEye': _$InjuredEyeEnumMap[instance.redEye],
       'tumors': _$InjuredEyeEnumMap[instance.tumors],
+      'tearing': _$InjuredEyeEnumMap[instance.tearing],
+      'visualAcuity': _$VisualAcuityEnumMap[instance.visualAcuity],
     };
 
 const _$PatologyEnumMap = {
@@ -149,4 +154,17 @@ const _$ReferredPatientToEnumMap = {
   ReferredPatientTo.LEFT: 'Cirugía',
   ReferredPatientTo.BOTH: 'Cuidado en casa',
   ReferredPatientTo.NONE: 'Cuidado en Casa',
+};
+
+const _$VisualAcuityEnumMap = {
+  VisualAcuity.ONE: '20/20',
+  VisualAcuity.TWO: '20/25',
+  VisualAcuity.THREE: '20/30',
+  VisualAcuity.FOUR: '20/40',
+  VisualAcuity.FIVE: '20/60',
+  VisualAcuity.SIX: '20/80',
+  VisualAcuity.SEVEN: '20/100',
+  VisualAcuity.EIGHT: '20/150',
+  VisualAcuity.NINE: '20/200',
+  VisualAcuity.TEN: '20/400',
 };

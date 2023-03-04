@@ -49,10 +49,19 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
                     child: PatientInitialEvaluationForm(formKey: _formKey,),
                   )
               ),
-              ElevatedButton(
-                  onPressed: () => _submit(),
-                  child: Text('Agregar Información')
-              )
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(width: double.infinity, height: 70),
+                child: ElevatedButton(
+                  child: Text('Agregar Información',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w100,
+                        fontSize: 20.0,
+                        color: Colors.white
+                    ),),
+
+                  onPressed: ()=> _submit(),
+                ),
+              ),
             ],
           ),
         ),

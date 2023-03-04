@@ -146,6 +146,7 @@ class _PatientFormState extends State<PatientForm> {
     return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Container(
+          height: 60,
           decoration: BoxDecoration(
               border: Border.fromBorderSide(BorderSide(width: 0.5, color: Colors.white)),
               borderRadius: BorderRadius.circular(5)

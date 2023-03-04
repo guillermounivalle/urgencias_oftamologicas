@@ -45,7 +45,9 @@ class PatientInitialEvaluation implements PersistentEntity {
   InjuredEye? strangeBody;//Cuerpo extraño en ojo
   InjuredEye? tearductyInjury; //Lesión en lagrimal
   InjuredEye? redEye;//Ojo Rojo
-  InjuredEye? tumors; //Lesión en lagrimal
+  InjuredEye? tumors; //Tumor
+  InjuredEye? tearing; //Tumor
+  VisualAcuity? visualAcuity;
 
   PatientInitialEvaluation({
     required this.documentId,
@@ -88,6 +90,8 @@ class PatientInitialEvaluation implements PersistentEntity {
     required this.tearductyInjury,
     required this.redEye,
     required this.tumors,
+    required this.tearing,
+    required this.visualAcuity
   });
 
   PatientInitialEvaluation.createNew();
