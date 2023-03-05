@@ -2,5 +2,5 @@ import 'package:urgencias_oftamologicas/src/blocs/infrastructure/database/databa
 import 'package:urgencias_oftamologicas/src/domain/patient/model/patient.model.dart';
 
 class PatientRepository extends DBRepository<Patient> {
-  PatientRepository() : super('patients', (json) => Patient.fromJson(json));
+  PatientRepository() : super('patient_information', (json) => Patient.fromJson(json));
 }

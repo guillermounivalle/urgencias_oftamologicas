@@ -3,5 +3,5 @@ import 'package:urgencias_oftamologicas/src/domain/patient_initial_evaluation/mo
 
 
 class PatientInitialEvaluationRepository extends DBRepository<PatientInitialEvaluation> {
-  PatientInitialEvaluationRepository() : super('initial_evaluation', (json) => PatientInitialEvaluation.fromJson(json));
+  PatientInitialEvaluationRepository() : super('patient_initial_evaluation', (json) => PatientInitialEvaluation.fromJson(json));
 }

@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/src/ui/users/patient_home.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_hospitalization.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_surgery.dart';
 import '../../blocs/app_navigate/select_module_button.dart';
 import '../../repository/styles/color.styles.dart';
 import '../app.signin/login.view.model.dart';
@@ -16,24 +14,6 @@ class MenuUserPage extends StatelessWidget {
   Future<void> _navigateToModuleSelected(BuildContext context, String module)async{
     //TODO: navigate to module selected
     switch(module) {
-      case "Hospitalization": {
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => PatientHospitalization(),
-          ),
-        );
-      }
-      break;
-      case "Surgery": {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => PatientSurgery(),
-          ),
-        );
-      }
-      break;
       case "Patient_home": {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -117,7 +97,7 @@ class MenuUserPage extends StatelessWidget {
               colorText: Colors.white,
               color: ColorStyles.appbarprimarycolor,//Title bar
               borderRadius: 5.0,
-              onPressed: () => _navigateToModuleSelected(context, 'Hospitalization')
+              onPressed: () => Navigator.pushNamed(context, 'patient_hospitalizacion')
           ),
           SizedBox(height: 20.0),
           SelectModuleButton(
@@ -126,7 +106,7 @@ class MenuUserPage extends StatelessWidget {
               colorText: Colors.white,
               color: ColorStyles.appbarprimarycolor,//Title bar
               borderRadius: 5.0,
-              onPressed: () => _navigateToModuleSelected(context, 'Surgery')
+              onPressed: () =>Navigator.pushNamed(context, 'patient_surgery')
           ),
           SizedBox(height: 20.0),
           SelectModuleButton(

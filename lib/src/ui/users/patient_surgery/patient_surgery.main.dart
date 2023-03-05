@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:urgencias_oftamologicas/src/repository/styles/color.styles.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patieninitialevaluation.form.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_initial_evaluation/patientinitialevaluation.view.model.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_surgery/patient_surgery.form.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_surgery/patient_surgery.view.model.dart';
 
-class PatientInitialEvaluationFormView extends StatefulWidget {
-  const PatientInitialEvaluationFormView({Key? key}) : super(key: key);
+class PatientSurgeryFormView extends StatefulWidget {
+  const PatientSurgeryFormView({Key? key}) : super(key: key);
 
   @override
-  State<PatientInitialEvaluationFormView> createState() => _PatientInitialEvaluationFormViewState();
+  State<PatientSurgeryFormView> createState() => _PatientSurgeryFormViewState();
 }
 
-class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluationFormView> {
+class _PatientSurgeryFormViewState extends State<PatientSurgeryFormView> {
   final _formKey = GlobalKey<FormState>();
-  final PatientInitialEvaluationViewModel _model = PatientInitialEvaluationViewModel();
+  final PatientSurgeryViewModel _model = PatientSurgeryViewModel();
 
   @override
   void initState() {
@@ -23,13 +23,13 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<PatientInitialEvaluationViewModel>(
+    return ChangeNotifierProvider<PatientSurgeryViewModel>(
       create: (_) => _model,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'EVALUACIÓN INICIAL',
+            'CIRUGIA',
             style: TextStyle(
                 fontWeight: FontWeight.w100,
                 fontSize: 16.0,
@@ -46,7 +46,7 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
                   key: _formKey,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: PatientInitialEvaluationForm(formKey: _formKey,),
+                    child: PatientSurgeryForm(formKey: _formKey,),
                   )
               ),
               ElevatedButton(
@@ -69,7 +69,7 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image.asset(
-                "images/evaluacion-inicial.jpg",
+                "images/cirugia.jpg",
                 height: 180.0,
                 //width: 100.0,
                 fit:BoxFit.cover,
@@ -78,7 +78,7 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
           ),
           SizedBox(height: 15.0),
           Text(
-            'Ingrese los datos de la valoración inicial del paciente',
+            'Por favor ingrese los datos del paciente',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.w300,
@@ -90,6 +90,7 @@ class _PatientInitialEvaluationFormViewState extends State<PatientInitialEvaluat
       ),
     );
   }
+
   Future<void> _submit() async {
     var formState = _formKey.currentState!;
     if (formState.validate()) {

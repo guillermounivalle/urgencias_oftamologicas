@@ -350,6 +350,7 @@ class _PatientInitialEvaluationFormState extends State<PatientInitialEvaluationF
         readOnly: true,
         style: TextStyle(color: Colors.white),
         initialValue: value != null ? OFTDateUtils.format(value) : null,
+        key: UniqueKey(),
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white, width: 0.5)
