@@ -72,14 +72,14 @@ class _PatientHospitalizationFormViewState extends State<PatientHospitalizationF
               child: Image.asset(
                 "images/hospitalizacion.jpg",
                 height: 180.0,
-                //width: 100.0,
+                width: 380.0,
                 fit:BoxFit.cover,
               ),
             ),
           ),
           SizedBox(height: 15.0),
           Text(
-            'Por favor ingrese los datos del paciente',
+            'Por favor ingrese los datos a\n registrar',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontWeight: FontWeight.w300,

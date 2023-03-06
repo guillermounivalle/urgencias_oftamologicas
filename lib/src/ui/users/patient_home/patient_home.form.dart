@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:urgencias_oftamologicas/src/blocs/common/view.model.consumer.dart';
+import 'package:urgencias_oftamologicas/src/domain/patient_home/model/patienthome.enum.dart';
 import 'package:urgencias_oftamologicas/src/repository/utils/dateutils.util.dart';
-import 'package:urgencias_oftamologicas/src/ui/users/patient_hospitalization/patient_hospitalization.view.model.dart';
-import 'package:urgencias_oftamologicas/src/domain/patient_hospitalization/model/patienthospitalization.enum.dart';
+import 'package:urgencias_oftamologicas/src/ui/users/patient_home/patient_home.view.model.dart';
 import '../../../repository/styles/color.styles.dart';
+import 'package:urgencias_oftamologicas/src/repository/styles/color.styles.dart';
 
-class PatientHospitalizationForm extends StatefulWidget {
+class PatientHomeForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-  const PatientHospitalizationForm({required this.formKey, Key? key}) : super(key: key);
+  const PatientHomeForm({required this.formKey, Key? key}) : super(key: key);
 
   @override
-  State<PatientHospitalizationForm> createState() => _PatientHospitalizationFormState();
+  State<PatientHomeForm> createState() => _PatientHomeFormState();
 }
 
-class _PatientHospitalizationFormState extends State<PatientHospitalizationForm> {
+class _PatientHomeFormState extends State<PatientHomeForm> {
   @override
   Widget build(BuildContext context) {
-    return ViewModelConsumer<PatientHospitalizationViewModel>(
+    return ViewModelConsumer<PatientHomeViewModel>(
         builder: (context, model, _) {
           return Column(
             children: [
@@ -32,53 +33,47 @@ class _PatientHospitalizationFormState extends State<PatientHospitalizationForm>
                 value: model.entity.consultationDate,
                 onSaved: (value) => model.entity.consultationDate = value,
               ),
-              _enumInput<HospitalizationDays>(
-                  label: 'Días de \nhospitalización:',
-                  value: model.entity.hospitalizationDays,
-                  items: HospitalizationDays.values,
-                  onSaved: (value) => model.entity.hospitalizationDays = value
+              _enumInput<VisualAcuity>(
+                  label: 'Agudeza visual\nal salir',
+                  value: model.entity.visualAcuitytoleaving,
+                  items: VisualAcuity.values,
+                  onSaved: (value) => model.entity.visualAcuitytoleaving = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Antibióticos',
+                  label: 'Se indicó\n Antibióticos',
                   value: model.entity.receivedAntibiotics,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.receivedAntibiotics = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Anti-inflamatorios',
+                  label: 'Se indicó\nAnti inflamatorios',
                   value: model.entity.receivedAntiinflmatories,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.receivedAntiinflmatories = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Hipertensores \nOculares',
+                  label: 'Hipertensores\nOculares',
                   value: model.entity.receivedOcularhypotensives,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.receivedOcularhypotensives = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Lubricantes',
+                  label: 'Se indicó\nLubricantes',
                   value: model.entity.receivedLubricants,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.receivedLubricants = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Antiagiogénicos',
-                  value: model.entity.receivedAntiasgiogenics,
+                  label: 'Se indicò\nAnalgésicos',
+                  value: model.entity.receivedAnalgesics,
                   items: SelectAnswer.values,
-                  onSaved: (value) => model.entity.receivedAntiasgiogenics = value
+                  onSaved: (value) => model.entity.receivedAnalgesics = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Interconsulta a \nSupraespecialidad',
+                  label: 'Interconsulta \nAmbulatortia',
                   value: model.entity.interConsultationstosupraspecialty,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.interConsultationstosupraspecialty = value
-              ),
-              _enumInput<VisualAcuity>(
-                  label: 'Agudeza Visual\n al salir',
-                  value: model.entity.visualAcuitytoleaving,
-                  items: VisualAcuity.values,
-                  onSaved: (value) => model.entity.visualAcuitytoleaving = value
               ),
             ],
           );

@@ -11,25 +11,6 @@ import '../app.signin/signout.dart';
 class MenuUserPage extends StatelessWidget {
   const MenuUserPage({super.key}) ;
 
-  Future<void> _navigateToModuleSelected(BuildContext context, String module)async{
-    //TODO: navigate to module selected
-    switch(module) {
-      case "Patient_home": {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            fullscreenDialog: true,  //true muestra el diálogo para retornar
-            builder: (context) => PatientHome(),
-          ),
-        );
-      }
-      break;
-      default: {
-        //statements;
-      }
-      break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +96,7 @@ class MenuUserPage extends StatelessWidget {
               colorText: Colors.white,
               color: ColorStyles.appbarprimarycolor,//Title bar
               borderRadius: 5.0,
-              onPressed: () => _navigateToModuleSelected(context, 'Patient_home')
+              onPressed: () => Navigator.pushNamed(context, 'patient_home')
           ),
           SizedBox(height: 30.0),
           TextButton(

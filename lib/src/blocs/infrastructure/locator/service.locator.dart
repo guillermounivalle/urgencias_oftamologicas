@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:urgencias_oftamologicas/src/domain/patient_home/app/patienthome.service.dart';
 import 'package:urgencias_oftamologicas/src/domain/patient_surgery/app/patientsurgery.service.dart';
 import '../../../repository/services/auth.dart';
 import '../auth/auth.service.dart';
@@ -16,4 +17,5 @@ void setupServiceLocator() {
   serviceLocator.registerSingleton(PatientInitialEvaluationService());
   serviceLocator.registerSingleton(PatientHospitalizationService());
   serviceLocator.registerSingleton(PatientSurgeryService());
+  serviceLocator.registerSingleton(PatientHomeService());
 }

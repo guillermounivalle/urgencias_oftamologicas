@@ -39,7 +39,7 @@ class _PatientSurgeryFormState extends State<PatientSurgeryForm> {
                   onSaved: (value) => model.entity.prevSurgeryDays = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Sutura de \Conjuntiva',
+                  label: 'Sutura de \nConjuntiva',
                   value: model.entity.conjuctivalSuture,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.conjuctivalSuture = value
@@ -51,7 +51,7 @@ class _PatientSurgeryFormState extends State<PatientSurgeryForm> {
                   onSaved: (value) => model.entity.cornealSuture = value
               ),
               _enumInput<SelectAnswer>(
-                  label: 'Sutura de  \Esclera',
+                  label: 'Sutura de\nEsclera',
                   value: model.entity.scleraSuture,
                   items: SelectAnswer.values,
                   onSaved: (value) => model.entity.scleraSuture = value
